@@ -21,6 +21,36 @@ let URL_SITE = 'http://forums.xamarin.com'
 
 let URL_API = URL_SITE + '/api/v1'
 
+/*
+ * Wrapper around fetch.Response which facilitates cancellation of requests.
+ */
+class ClientResponse {
+    constructor(responseCallback, errorCallback) {
+        this._responseCallback = responseCallback;
+        this._errorCallback = errorCallback;
+        this.active = true;
+    }
+
+    cancel() {
+        console.log('ClientResponse.cancel');
+        this.active = false;
+    }
+
+    responseCallback(data) {
+        if (this.active) {
+            this.active = false;
+            this._responseCallback(data);
+        }
+    }
+
+    errorCallback(data) {
+        if (this.active) {
+            this.active = false;
+            this._errorCallback(data);
+        }
+    }
+};
+
 class ClientVanilla {
     constructor(enforcer) {
         if (enforcer != singletonEnforcer) {
@@ -35,16 +65,21 @@ class ClientVanilla {
         return this[singleton];
     }
 
-    _fetch(url, process, callback) {
+    _fetch(url, process, responseCallback, errorCallback) {
         var request = new Request();
         request.url = URL_API + url;
-        let resp = fetch(request)
+
+        var wrapper = new ClientResponse(responseCallback, errorCallback);
+
+        fetch(request)
+            .then(ApiUtils.checkStatus)
             .then(resp => resp.json())
             .then(resp => process(resp))
-            .then(resp => callback(resp))
-            .catch(e => e)
-            .done()
-        return resp;
+            .then(resp => wrapper.responseCallback(resp))
+            .catch(e => wrapper.errorCallback(e))
+            .done();
+
+        return wrapper;
     }
 
     _objectValues(input) {
@@ -53,17 +88,6 @@ class ClientVanilla {
             output.push(input[key]);
         }
         return output;
-    }
-
-    /* Return list of all categories.
-     *
-     * Return type: array<item>, where item is a JSON object representing
-     * a group / category.
-     */
-    getCategoryListNormal(callback) {
-        console.log('Client.getCategoryListNormal');
-        return this._fetch('/categories/list.json',
-                (data => data.Categories), callback);
     }
 
     /* Return list of all categories.
@@ -77,7 +101,7 @@ class ClientVanilla {
      *
      * rowIDs is an array of arrays of category IDs.
      */
-    getCategoryListSectioned(callback) {
+    getCategoryListSectioned(responseCallback, errorCallback) {
         console.log('Client.getCategoryListSectioned');
         var process = function(response) {
             var inData = response.Categories;
@@ -116,8 +140,10 @@ class ClientVanilla {
             };
         }
 
-        return this._fetch('/categories/list.json',
-                (data => process(data)), callback);
+        return this._fetch(
+                '/categories/list.json',
+                (data => process(data)),
+                responseCallback, errorCallback);
     }
 
     /* Returns a list of all discussions.

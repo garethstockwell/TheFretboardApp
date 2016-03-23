@@ -10,9 +10,9 @@ const CommentListItem = require('./CommentListItem');
 const ListViewPaged = require('./ListViewPaged');
 
 class CommentList extends ListViewPaged {
-    componentDidMount() {
+    componentWillMount() {
         var currentPage = this.props.currentPage || 1;
-        console.log('CommentList.componentDidMount currentPage '
+        console.log('CommentList.componentWillMount currentPage '
             + currentPage);
         //this.setLoading(true);
         this.setState({
@@ -34,10 +34,10 @@ class CommentList extends ListViewPaged {
         this.setLoading(false);
     }
 
-    renderItemRow(item) {
+    renderItemRow(commentData) {
         return (
             <CommentListItem
-                item={item}
+                commentData={commentData}
             />
         );
     }
