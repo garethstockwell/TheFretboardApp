@@ -12,7 +12,6 @@ This file captures miscellaneous TODO items which are not recorded in the REQUIR
    * Add status message under spinner (e.g. "Logging in"; "Log in failed")
    * "Remember me" checkbox
 * Store application-wide state (e.g. login status) in App object
-* Add navigation methods (e.g. goToCategory(...)) to App object
 * Keep some context on screen when showing spinner (e.g. when navigating between pages)
 * Wait for a short time before showing the scene spinner
 * Gesture-based navigation (e.g. swipes) between pages

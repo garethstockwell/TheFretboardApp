@@ -102,7 +102,6 @@ class DiscussionList extends React.Component {
             if (this.state.data) {
                 var totalNumItems =
                     this.props.categoryData['CountAllDiscussions'];
-                console.log('***** HERE');
                 return (
                     <ListViewPaged
                         totalNumItems={totalNumItems}

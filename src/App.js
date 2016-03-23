@@ -106,7 +106,6 @@ class App extends Component {
                 <SceneCategoryList
                     navigator={navigator}
                     navigationBar={NavigationBar}
-                    route={route}
                     {...route.passProps}
                 />
             );
@@ -116,6 +115,7 @@ class App extends Component {
             return (
                 <SceneCategory
                     navigator={navigator}
+                    navigationBar={NavigationBar}
                     {...route.passProps}
                 />
             );
@@ -125,7 +125,7 @@ class App extends Component {
             return (
                 <SceneDiscussion
                     navigator={navigator}
-                    title={route.title}
+                    navigationBar={NavigationBar}
                     {...route.passProps}
                 />
             );
