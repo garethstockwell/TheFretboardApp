@@ -5,55 +5,106 @@
 'use strict';
 
 import React, {
+    Component,
     View,
     Text,
 } from 'react-native';
 
 import Client from '../Client/Client';
 const CategoryListItem = require('./CategoryListItem');
-const ListViewSimple = require('./ListViewSimple');
 const ListViewSectioned = require('./ListViewSectioned');
 const Styles = require('../Styles');
 
-class CategoryList extends ListViewSectioned {
-    componentDidMount() {
-        var data = this.props.categoryListData;
-        console.log('CategoryList.componentDidMount data ' + data);
-        if (data) {
-            this.onDataChanged(data);
-        } else {
-            this.setLoading(true);
-            this.load();
-        }
+class CategoryList extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            error: false,
+            data: null,
+        };
+    }
+
+    componentWillMount() {
+        console.log('CategoryList.componentWillMount');
+        this.load();
     }
 
     load() {
         console.log('CategoryList.load');
+
+        this.props.onLoadingChanged(true);
+
         Client.getCategoryListSectioned(
-            this.onLoaded.bind(this));
+            this.onGetCategoryListResponse.bind(this),
+            this.onClientError.bind(this)
+        );
     }
 
-    onLoaded(categoryListData) {
-        console.log('CategoryList.onLoaded');
-        this.onDataChanged(categoryListData);
-        this.setLoading(false);
+    onGetCategoryListResponse(response) {
+        console.log('CategoryList.onGetCategoryListResponse');
+
+        this.setState({
+            error: false,
+            data: response,
+        });
+
+        this.props.onLoadingChanged(false);
+    }
+
+    onClientError(error) {
+        console.log('CategoryList.onClientError');
+
+        this.setState({
+            error: error,
+            data: null,
+        });
+
+        this.props.onLoadingChanged(false);
     }
 
     renderSectionHeader(sectionData, sectionID) {
         return (
             <View style={Styles.liSectionHeading}>
-                <Text style={Styles.liSectionHeadingText}>{sectionData.Name}</Text>
+                <Text style={Styles.liSectionHeadingText}>
+                    {sectionData.Name}
+                </Text>
             </View>
         );
     }
 
-    renderRow(item) {
+    renderRow(categoryData) {
         return (
             <CategoryListItem
-                item={item}
-                onPress={(categoryID, categoryName) =>
-                    this.props.onPress(categoryID, categoryName)}
+                categoryData={categoryData}
+                onPress={(categoryData) => this.props.onPress(categoryData)}
             />
+        );
+    }
+
+    _renderBody() {
+        if (this.state.error) {
+            console.log('CategoryList._renderBody error');
+            return (
+                <Text>ERROR</Text>
+            );
+        } else {
+            if (this.state.data != null) {
+                return (
+                    <ListViewSectioned
+                        renderSectionHeader={this.renderSectionHeader}
+                        renderRow={this.renderRow.bind(this)}
+                        data={this.state.data}
+                    />
+                );
+            }
+        }
+    }
+
+    render() {
+        return (
+            <View style={Styles.container}>
+                {this._renderBody()}
+            </View>
         );
     }
 }

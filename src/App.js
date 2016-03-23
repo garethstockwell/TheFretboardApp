@@ -43,25 +43,26 @@ class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            loaded: false,
+            loading: true,
         }
     }
 
-    componentWillMount() {
-        // Load data for first scene
-        Client.getCategoryListSectioned(
-            this.onLoaded.bind(this));
+    componentDidMount() {
+        setTimeout(
+            () => { this.setState({ loading: false }); },
+            500
+        );
     }
 
-    onLoaded(categoryListData) {
-        this.setState({
-            loaded: true,
-            categoryListData: categoryListData,
-        });
+    _renderSplash() {
+        return (
+            <View style={Styles.splash}>
+                <SceneSplash />
+            </View>
+        );
     }
 
-    render() {
-        if (this.state.loaded) {
+    _renderNavigator() {
         return (
             <Navigator
                 configureScene={(route) => {
@@ -73,18 +74,18 @@ class App extends Component {
                 initialRoute={{
                     id: 'SceneCategoryList',
                     title: 'Home',
-                    passProps: {
-                        categoryListData: this.state.categoryListData,
-                    },
                 }}
                 navigationBar={NavigationBar}
                 renderScene={this.renderScene.bind(this)}
             />
         );
+    }
+
+    render() {
+        if (this.state.loading) {
+            return this._renderSplash();
         } else {
-            return (
-                <SceneSplash />
-            );
+            return this._renderNavigator();
         }
     }
 
@@ -105,7 +106,6 @@ class App extends Component {
                 <SceneCategoryList
                     navigator={navigator}
                     navigationBar={NavigationBar}
-                    route={route}
                     {...route.passProps}
                 />
             );
@@ -115,6 +115,7 @@ class App extends Component {
             return (
                 <SceneCategory
                     navigator={navigator}
+                    navigationBar={NavigationBar}
                     {...route.passProps}
                 />
             );
@@ -124,7 +125,7 @@ class App extends Component {
             return (
                 <SceneDiscussion
                     navigator={navigator}
-                    title={route.title}
+                    navigationBar={NavigationBar}
                     {...route.passProps}
                 />
             );
