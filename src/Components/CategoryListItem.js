@@ -16,18 +16,18 @@ const Styles = require('../Styles');
 class CategoryListItem extends React.Component {
     render() {
         var CountAllDiscussions = '';
-        if (this.props.item.CountAllDiscussions) {
+        if (this.props.categoryData.CountAllDiscussions) {
             CountAllDiscussions = ' ('
-                + this.props.item.CountAllDiscussions + ')';
+                + this.props.categoryData.CountAllDiscussions + ')';
         }
 
         return (
             <TouchableHighlight
-                onPress={() => this.props.onPress(this.props.item)}
+                onPress={() => this.props.onPress(this.props.categoryData)}
             >
                 <View style={Styles.li}>
                     <Text style={Styles.liText}>
-                        {this.props.item.Name}{CountAllDiscussions}
+                        {this.props.categoryData.Name}{CountAllDiscussions}
                     </Text>
                 </View>
             </TouchableHighlight>

@@ -59,12 +59,11 @@ class DiscussionList extends ListViewPaged {
         this.setLoading(false);
     }
 
-    renderItemRow(item) {
+    renderItemRow(discussionData) {
         return (
             <DiscussionListItem
-                item={item}
-                onPress={(discussionID, discussionName) =>
-                    this.props.onPress(discussionID, discussionName)}
+                discussionData={discussionData}
+                onPress={(discussionData) => this.props.onPress(discussionData)}
             />
         );
     }

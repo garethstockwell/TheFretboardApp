@@ -17,10 +17,6 @@ const Spinner = require('../Components/Spinner');
 const Styles = require('../Styles');
 
 class SceneSplash extends Component {
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         return (
             <View style={Styles.splash}>

@@ -34,10 +34,10 @@ class CommentList extends ListViewPaged {
         this.setLoading(false);
     }
 
-    renderItemRow(item) {
+    renderItemRow(commentData) {
         return (
             <CommentListItem
-                item={item}
+                commentData={commentData}
             />
         );
     }

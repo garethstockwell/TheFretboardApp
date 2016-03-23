@@ -9,6 +9,7 @@
 import React, {
     Component,
     Navigator,
+    Text, // DEBUGGING
     View,
 } from 'react-native';
 
@@ -19,7 +20,7 @@ class Scene extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            loading: false,
+            loading: true,
             hideNavBar: false,
         }
     }
@@ -27,6 +28,7 @@ class Scene extends Component {
     _onLoadingChanged(value) {
         console.log(this.constructor.name + '._onLoadingChanged ' + value);
         this.setState({ loading: value });
+        this.props.onLoadingChanged(value);
     }
 
     _onScroll() {

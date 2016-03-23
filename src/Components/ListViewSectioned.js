@@ -7,14 +7,14 @@
 'use strict';
 
 import React, {
+    Component,
     ListView,
     View,
 } from 'react-native';
 
-const ListViewBase = require('./ListViewBase');
 const Styles = require('../Styles');
 
-class ListViewSectioned extends ListViewBase {
+class ListViewSectioned extends React.Component {
     constructor(props) {
         super(props);
 
@@ -36,16 +36,18 @@ class ListViewSectioned extends ListViewBase {
         };
     }
 
-    onDataChanged(data) {
-        var dataBlob = data.dataBlob;
-        var sectionIDs = data.sectionIDs;
-        var rowIDs = data.rowIDs;
+    componentDidMount() {
+        var data = this.props.data;
+
+        var dataBlob = data.dataBlob || {};
+        var sectionIDs = data.sectionIDs || [];
+        var rowIDs = data.rowIDs || [];
 
         var numRows = rowIDs.reduce(function(total, entry){
             return total + entry.length;
         }, 0);
 
-        console.log(this.constructor.name + '.onDataChanged'
+        console.log('ListViewSectioned.componentDidMount'
             + ' numSections ' + sectionIDs.length
             + ' numRows ' + numRows);
 
@@ -56,18 +58,16 @@ class ListViewSectioned extends ListViewBase {
     }
 
     render() {
-        console.log(this.constructor.name + '.render');
+        console.log('ListViewSectioned.render');
 
         return (
-            <View style={Styles.container}>
-                <ListView
-                    dataSource={this.state.dataSource}
-                    renderRow={this.renderRow.bind(this)}
-                    renderSectionHeader={this.renderSectionHeader.bind(this)}
-                    style={Styles.listview}
-                    onScroll={this.props.onScroll}
-                />
-            </View>
+            <ListView
+                dataSource={this.state.dataSource}
+                renderRow={this.props.renderRow}
+                renderSectionHeader={this.props.renderSectionHeader}
+                style={Styles.listview}
+                onScroll={this.props.onScroll}
+            />
         );
     }
 }

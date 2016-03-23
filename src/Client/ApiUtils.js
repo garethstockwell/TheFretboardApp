@@ -10,9 +10,10 @@ var ApiUtils = {
     checkStatus: function(response) {
         // https://github.com/github/fetch
         if (response.status >= 200 && response.status < 300) {
+            // DEBUGGING
             let error = new Error('TESTING');
             error.response = response;
-            throw error;
+            //throw error;
 
             return response;
         } else {

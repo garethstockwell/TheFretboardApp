@@ -8,6 +8,7 @@
 
 import React, {
     View,
+    Text,
 } from 'react-native';
 
 const CategoryList = require('../Components/CategoryList');
@@ -31,7 +32,6 @@ class SceneCategoryList extends Scene {
                 onPress={(categoryData) => this._onPressCategory(categoryData)}
                 onScroll={() => this._onScroll()}
                 onLoadingChanged={(value) => this._onLoadingChanged(value)}
-                categoryListData={this.props.categoryListData}
             />
         );
     }
