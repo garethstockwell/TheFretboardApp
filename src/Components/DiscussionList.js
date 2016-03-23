@@ -41,21 +41,21 @@ class DiscussionList extends ListViewPaged {
             this.props.categoryData['CategoryID'],
             pageIndex,
             itemIndex,
-            this.onDiscussionListLoaded.bind(this)
+            this.onDiscussionListResponse.bind(this)
         );
     }
 
-    onDiscussionListLoaded(data) {
-        console.log('DiscussionList.onDiscussionListLoaded');
+    onDiscussionListResponse(response) {
+        console.log('DiscussionList.onDiscussionListResponse');
 
-        if (data.pageIndex == 1) {
-            var itemsPerPage = data.discussions.length;
-            console.log('DiscussionList.onDiscussionListLoaded'
+        if (response.pageIndex == 1) {
+            var itemsPerPage = response.discussions.length;
+            console.log('DiscussionList.onDiscussionListResponse'
                 + ' itemsPerPage ' + itemsPerPage);
             this.setState({itemsPerPage: itemsPerPage});
         }
 
-        this.onDataChanged(data.pageIndex, data.discussions);
+        this.onDataChanged(response.pageIndex, response.discussions);
         this.setLoading(false);
     }
 

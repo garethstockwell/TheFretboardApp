@@ -30,12 +30,19 @@ class CategoryList extends ListViewSectioned {
     load() {
         console.log('CategoryList.load');
         Client.getCategoryListSectioned(
-            this.onLoaded.bind(this));
+            this.onGetCategoryListResponse.bind(this),
+            this.onClientError.bind(this));
     }
 
-    onLoaded(categoryListData) {
-        console.log('CategoryList.onLoaded');
-        this.onDataChanged(categoryListData);
+    onGetCategoryListResponse(response) {
+        console.log('CategoryList.onGetCategoryListResponse');
+        this.onDataChanged(response);
+        this.setLoading(false);
+    }
+
+    onClientError(error) {
+        console.log('CategoryList.onClientError');
+        this.setState({error: error});
         this.setLoading(false);
     }
 
@@ -55,6 +62,19 @@ class CategoryList extends ListViewSectioned {
                     this.props.onPress(categoryID, categoryName)}
             />
         );
+    }
+
+    render() {
+        // TODO: this should compose ListView, not inherit from it
+        if (this.state.error) {
+            return (
+                <View style={Styles.container}>
+                    <Text>ERROR</Text>
+                </View>
+            );
+        } else {
+            return super.render();
+        }
     }
 }
 

@@ -6,14 +6,17 @@
 
 'use strict';
 
-class ApiUtils {
-    checkStatus(response) {
+var ApiUtils = {
+    checkStatus: function(response) {
         // https://github.com/github/fetch
         if (response.status >= 200 && response.status < 300) {
-            console.log('OK ' + response.status);
+            let error = new Error('TESTING');
+            error.response = response;
+            throw error;
+
             return response;
         } else {
-            console.log('Error ' + response.statusText);
+            console.log('ApiUtils.checkStatus error ' + response.statusText);
             let error = new Error(response.statusText);
             error.response = response;
             throw error;

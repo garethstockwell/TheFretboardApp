@@ -50,37 +50,46 @@ class App extends Component {
     componentWillMount() {
         // Load data for first scene
         Client.getCategoryListSectioned(
-            this.onLoaded.bind(this));
+            this.onGetCategoryListResponse.bind(this),
+            this.onClientError.bind(this));
     }
 
-    onLoaded(categoryListData) {
+    onGetCategoryListResponse(response) {
         this.setState({
             loaded: true,
-            categoryListData: categoryListData,
+            categoryListData: response,
+        });
+    }
+
+    onClientError(error) {
+        console.log('App.onClientError');
+        this.setState({
+            loaded: true,
+            error: error,
         });
     }
 
     render() {
         if (this.state.loaded) {
-        return (
-            <Navigator
-                configureScene={(route) => {
-                    if (route.sceneConfig) {
-                        return route.sceneConfig;
-                    }
-                    return Navigator.SceneConfigs.FloatFromRight;
-                }}
-                initialRoute={{
-                    id: 'SceneCategoryList',
-                    title: 'Home',
-                    passProps: {
-                        categoryListData: this.state.categoryListData,
-                    },
-                }}
-                navigationBar={NavigationBar}
-                renderScene={this.renderScene.bind(this)}
-            />
-        );
+            return (
+                <Navigator
+                    configureScene={(route) => {
+                        if (route.sceneConfig) {
+                            return route.sceneConfig;
+                        }
+                        return Navigator.SceneConfigs.FloatFromRight;
+                    }}
+                    initialRoute={{
+                        id: 'SceneCategoryList',
+                        title: 'Home',
+                        passProps: {
+                            categoryListData: this.state.categoryListData,
+                        },
+                    }}
+                    navigationBar={NavigationBar}
+                    renderScene={this.renderScene.bind(this)}
+                />
+            );
         } else {
             return (
                 <SceneSplash />
