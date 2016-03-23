@@ -128,6 +128,7 @@ class App extends Component {
         }
 
         if (route.id === 'SceneCategoryList') {
+            console.log('HERE ' + this.state.initialSceneData);
             return (
                 <SceneCategoryList
                     navigator={navigator}

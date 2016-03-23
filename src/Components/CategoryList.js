@@ -16,24 +16,9 @@ const ListViewSectioned = require('./ListViewSectioned');
 const Styles = require('../Styles');
 
 class CategoryList extends React.Component {
-    constructor(props) {
-        super(props);
-        console.log('CategoryList data ' + props.data);
-        this.state = {
-            data: props.data || {},
-        };
-        if (data) {
-            this.props.onLoadingChanged(false);
-        }
-    }
-
     componentDidMount() {
-        console.log('CategoryList.componentDidMount data ' + this.state.data);
-
-        if (!this.state.data) {
-            this.props.onLoadingChanged(true);
-            this.load();
-        }
+        console.log('CategoryList.componentDidMount');
+        this.load();
     }
 
     load() {
