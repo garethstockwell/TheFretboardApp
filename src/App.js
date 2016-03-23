@@ -48,32 +48,10 @@ class App extends Component {
     }
 
     componentDidMount() {
-        Client.getCategoryListSectioned(
-            this.onGetCategoryListResponse.bind(this),
-            this.onClientError.bind(this)
+        setTimeout(
+            () => { this.setState({ loading: false }); },
+            500
         );
-    }
-
-    onGetCategoryListResponse(response) {
-        console.log('App.onGetCategoryListResponse');
-
-        this.setState({
-            loading: false,
-            initialSceneData: response,
-        });
-    }
-
-    onClientError(error) {
-        console.log('App.onClientError');
-
-        // TODO: handle this
-
-        this.props.onLoadingChanged(false);
-    }
-
-    _onLoadingChanged(value) {
-        console.log('App._onLoadingChanged ' + value);
-        this.setState({loading: value});
     }
 
     _renderSplash() {
@@ -96,10 +74,6 @@ class App extends Component {
                 initialRoute={{
                     id: 'SceneCategoryList',
                     title: 'Home',
-                    passProps: {
-                        onLoadingChanged: this._onLoadingChanged.bind(this),
-                        data: this.state.initialSceneData,
-                    },
                 }}
                 navigationBar={NavigationBar}
                 renderScene={this.renderScene.bind(this)}
@@ -128,7 +102,6 @@ class App extends Component {
         }
 
         if (route.id === 'SceneCategoryList') {
-            console.log('HERE ' + this.state.initialSceneData);
             return (
                 <SceneCategoryList
                     navigator={navigator}

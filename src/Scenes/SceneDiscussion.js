@@ -21,6 +21,7 @@ class SceneDiscussion extends Scene {
         return (
             <Discussion
                 discussionData={this.props.discussionData}
+                onLoadingChanged={(value) => this._onLoadingChanged(value)}
             />
         );
     }

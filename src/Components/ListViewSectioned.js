@@ -36,7 +36,17 @@ class ListViewSectioned extends React.Component {
         };
     }
 
-    componentDidMount() {
+    componentWillMount() {
+        console.log('ListViewSectioned.componentWillMount');
+        this.update();
+    }
+
+    componentWillReceiveProps() {
+        console.log('ListViewSectioned.componentWillReceiveProps');
+        this.update();
+    }
+
+    update() {
         var data = this.props.data;
 
         var dataBlob = data.dataBlob || {};

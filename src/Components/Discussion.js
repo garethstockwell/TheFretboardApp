@@ -36,10 +36,13 @@ const DUMMY_HTML = `
 class Discussion extends React.Component {
     constructor(props) {
         super(props);
-        console.log('XXX');
         this.state = {
             discussionData: this.props.discussionData,
         };
+    }
+
+    componentDidMount() {
+        this.props.onLoadingChanged(false);
     }
 
     render() {

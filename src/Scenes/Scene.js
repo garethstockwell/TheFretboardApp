@@ -28,7 +28,6 @@ class Scene extends Component {
     _onLoadingChanged(value) {
         console.log(this.constructor.name + '._onLoadingChanged ' + value);
         this.setState({ loading: value });
-        this.props.onLoadingChanged(value);
     }
 
     _onScroll() {

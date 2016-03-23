@@ -16,13 +16,23 @@ const ListViewSectioned = require('./ListViewSectioned');
 const Styles = require('../Styles');
 
 class CategoryList extends React.Component {
-    componentDidMount() {
-        console.log('CategoryList.componentDidMount');
+    constructor(props) {
+        super(props);
+        this.state = {
+            error: false,
+            data: null,
+        };
+    }
+
+    componentWillMount() {
+        console.log('CategoryList.componentWillMount');
         this.load();
     }
 
     load() {
         console.log('CategoryList.load');
+
+        this.props.onLoadingChanged(true);
 
         Client.getCategoryListSectioned(
             this.onGetCategoryListResponse.bind(this),
@@ -72,17 +82,17 @@ class CategoryList extends React.Component {
     }
 
     _renderBody() {
-        if (this.state) {
-            if (this.state.error) {
-                console.log('CategoryList._renderBody error');
-                return (
-                    <Text>ERROR</Text>
-                );
-            } else {
+        if (this.state.error) {
+            console.log('CategoryList._renderBody error');
+            return (
+                <Text>ERROR</Text>
+            );
+        } else {
+            if (this.state.data != null) {
                 return (
                     <ListViewSectioned
                         renderSectionHeader={this.renderSectionHeader}
-                        renderRow={this.renderRow}
+                        renderRow={this.renderRow.bind(this)}
                         data={this.state.data}
                     />
                 );

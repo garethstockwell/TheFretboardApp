@@ -15,9 +15,6 @@ This file captures miscellaneous TODO items which are not recorded in the REQUIR
 * Add navigation methods (e.g. goToCategory(...)) to App object
 * Keep some context on screen when showing spinner (e.g. when navigating between pages)
 * Wait for a short time before showing the scene spinner
-* Instead of inheriting from ListViewXxx, it should be instantiated via the parent component's render() function.
-* API timeout / cancel
-* Handle API errors
 * Gesture-based navigation (e.g. swipes) between pages
 * Jump to page
 * Version management
