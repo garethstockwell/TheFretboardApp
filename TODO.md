@@ -8,7 +8,6 @@ This file captures miscellaneous TODO items which are not recorded in the REQUIR
    * Show a message on the login screen
    * Use dev server URL
 * SceneLogin
-   * Replace SceneSplash
    * Add status message under spinner (e.g. "Logging in"; "Log in failed")
    * "Remember me" checkbox
 * Store application-wide state (e.g. login status) in App object
