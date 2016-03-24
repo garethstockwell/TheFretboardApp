@@ -16,6 +16,7 @@ import React, {
 } from 'react-native';
 
 import Client from '../Client/Client';
+const Button = require('../Components/Button');
 const Spinner = require('../Components/Spinner');
 const Styles = require('../Styles');
 
@@ -62,17 +63,23 @@ class SceneLogin extends Component {
                 </View>
             );
         } else {
-            // TODO: 'username' and 'password' labels
-            // TODO: separation between TextInputs
             // TODO: rounded corners
             // TODO: add 'continue as guest'
             // TODO: add 'remember me' checkbox
             return (
                 <View style={Styles.loginView}>
+                    <Text style={Styles.loginLabelText}>
+                        Username
+                    </Text>
+
                     <TextInput
                          style={Styles.loginTextInput}
                          onChangeText={(text) => this.setState({username: text})}
                     />
+
+                    <Text style={Styles.loginLabelText}>
+                        Password
+                    </Text>
 
                     <TextInput
                          style={Styles.loginTextInput}
@@ -80,13 +87,15 @@ class SceneLogin extends Component {
                          onChangeText={(text) => this.setState({password: text})}
                     />
 
-                    <TouchableHighlight
+                    <Button
                         onPress={() => this.login()}
-                    >
-                        <Text style={Styles.frontPageTitleText}>
-                            Log in
-                        </Text>
-                    </TouchableHighlight>
+                        text={'Log in'}
+                    />
+
+                    <Button
+                        onPress={() => this.props.onLoginComplete()}
+                        text={'Skip'}
+                    />
                 </View>
             );
         }
