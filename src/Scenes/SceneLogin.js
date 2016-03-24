@@ -10,6 +10,7 @@ import React, {
     Component,
     Navigator,
     Text,
+    TextInput,
     TouchableHighlight,
     View,
 } from 'react-native';
@@ -22,6 +23,8 @@ class SceneLogin extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            username: '',
+            password: '',
             waiting: false,
         }
     }
@@ -31,7 +34,10 @@ class SceneLogin extends Component {
 
         this.setState({ waiting: true });
 
-        Client.logIn('test', 'abc', this.onLoginComplete.bind(this));
+        Client.logIn(
+            this.state.username,
+            this.state.password,
+            this.onLoginComplete.bind(this));
     }
 
     onLoginComplete(result) {
@@ -39,25 +45,49 @@ class SceneLogin extends Component {
 
         this.setState({ waiting: false });
 
-        this.props.onLoginComplete();
+        if (result) {
+            this.props.onLoginComplete();
+        } else {
+            // TODO: display 'login failed' message
+        }
     }
 
     _renderBody() {
         if (this.state.waiting) {
             return (
-                <View style={Styles.frontPageSpinner}>
-                    <Spinner />
+                <View style={Styles.loginView}>
+                    <View style={Styles.frontPageSpinner}>
+                        <Spinner />
+                    </View>
                 </View>
             );
         } else {
+            // TODO: 'username' and 'password' labels
+            // TODO: separation between TextInputs
+            // TODO: rounded corners
+            // TODO: add 'continue as guest'
+            // TODO: add 'remember me' checkbox
             return (
-                <TouchableHighlight
-                    onPress={() => this.login()}
-                >
-                    <Text style={Styles.frontPageTitleText}>
-                        Log in
-                    </Text>
-                </TouchableHighlight>
+                <View style={Styles.loginView}>
+                    <TextInput
+                         style={Styles.loginTextInput}
+                         onChangeText={(text) => this.setState({username: text})}
+                    />
+
+                    <TextInput
+                         style={Styles.loginTextInput}
+                         secureTextEntry={true}
+                         onChangeText={(text) => this.setState({password: text})}
+                    />
+
+                    <TouchableHighlight
+                        onPress={() => this.login()}
+                    >
+                        <Text style={Styles.frontPageTitleText}>
+                            Log in
+                        </Text>
+                    </TouchableHighlight>
+                </View>
             );
         }
     }
@@ -71,9 +101,7 @@ class SceneLogin extends Component {
                     </Text>
                 </View>
 
-                <View style={Styles.loginView}>
-                    {this._renderBody()}
-                </View>
+                {this._renderBody()}
             </View>
         );
     }

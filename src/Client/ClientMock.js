@@ -31,12 +31,14 @@ class ClientMock {
     /* Log in
      *
      */
-    logIn(userName, password, callback) {
-        console.log('Client.logIn');
+    logIn(username, password, callback) {
+        console.log('Client.logIn'
+            + ' username ' + username
+            + ' password ' + password);
 
         setTimeout(
             () => {
-                var result = (userName == 'test' && password == 'abc');
+                var result = (username == 'test' && password == 'abc');
                 callback(result);
             },
             500
