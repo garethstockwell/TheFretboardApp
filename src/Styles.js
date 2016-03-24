@@ -83,6 +83,11 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
 
+    loginTextInput: {
+        height: DIM.HEIGHT_NAVBAR,
+        backgroundColor: COLOR.WHITE,
+    },
+
     frontPageSpinner: {
         backgroundColor: COLOR.TRANSPARENT,
         marginTop: DIM.MARGIN_SPINNER,
