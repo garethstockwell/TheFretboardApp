@@ -4,9 +4,11 @@
 
 'use strict';
 
+import ClientMock from './ClientMock';
 import ClientVanilla from './ClientVanilla';
 
-let instance = ClientVanilla.instance;
+let instance = ClientMock.instance;
+//let instance = ClientVanilla.instance;
 
 export default instance;
 

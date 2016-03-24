@@ -159,7 +159,8 @@ class ClientVanilla {
     /* Returns a list of all discussions in a specified category.
      *
      */
-    getCategoryDiscussionList(categoryID, pageIndex, itemIndex, callback) {
+    getCategoryDiscussionList(categoryID, pageIndex, itemIndex,
+            responseCallback, errorCallback) {
         console.log('Client.getCategoryDiscussionList'
             + ' categoryID '+ categoryID
             + ' pageIndex ' + pageIndex
@@ -174,7 +175,7 @@ class ClientVanilla {
                         pageIndex: pageIndex,
                         discussions: data.Discussions
                     };
-                }), callback);
+                }), responseCallback, errorCallback);
     }
 };
 
