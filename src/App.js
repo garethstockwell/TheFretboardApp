@@ -19,6 +19,7 @@ const NavigationBar = require('./Components/NavigationBar');
 const SceneCategoryList = require('./Scenes/SceneCategoryList');
 const SceneCategory = require('./Scenes/SceneCategory');
 const SceneDiscussion = require('./Scenes/SceneDiscussion');
+const SceneLogin = require('./Scenes/SceneLogin');
 const SceneSplash = require('./Scenes/SceneSplash');
 const Styles = require('./Styles');
 
@@ -41,24 +42,29 @@ function androidAddBackButtonListener(navigator) {
 
 class App extends Component {
     constructor(props) {
+        console.log('--- TheFretboardApp starting ---');
+
         super(props);
         this.state = {
-            loading: true,
+            login: true,
         }
-    }
-
-    componentDidMount() {
-        setTimeout(
-            () => { this.setState({ loading: false }); },
-            500
-        );
     }
 
     _renderSplash() {
         return (
-            <View style={Styles.splash}>
-                <SceneSplash />
-            </View>
+            <SceneSplash />
+        );
+    }
+
+    _loginComplete() {
+        this.setState({ login: false });
+    }
+
+    _renderLogin() {
+        return (
+            <SceneLogin
+                onLoginComplete={this._loginComplete.bind(this)}
+            />
         );
     }
 
@@ -82,8 +88,8 @@ class App extends Component {
     }
 
     render() {
-        if (this.state.loading) {
-            return this._renderSplash();
+        if (this.state.login) {
+            return this._renderLogin();
         } else {
             return this._renderNavigator();
         }
@@ -95,6 +101,15 @@ class App extends Component {
         if (route.id === 'SceneSplash') {
             return (
                 <SceneSplash
+                    navigator={navigator}
+                    {...route.passProps}
+                />
+            );
+        }
+
+        if (route.id === 'SceneLogin') {
+            return (
+                <SceneLogin
                     navigator={navigator}
                     {...route.passProps}
                 />

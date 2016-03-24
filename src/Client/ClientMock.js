@@ -28,6 +28,33 @@ class ClientMock {
         return this[singleton];
     }
 
+    /* Log in
+     *
+     */
+    logIn(userName, password, callback) {
+        console.log('Client.logIn');
+
+        setTimeout(
+            () => {
+                var result = (userName == 'test' && password == 'abc');
+                callback(result);
+            },
+            500
+        );
+    }
+
+    /* Log out.
+     *
+     */
+    logOut(callback) {
+        console.log('Client.logOut');
+
+        setTimeout(
+            () => { callback(); },
+            500
+        );
+    }
+
     /* Return list of all categories.
      *
      * Return type: [dataBlob, sectionIDs, rowIDs]
