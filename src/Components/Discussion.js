@@ -12,7 +12,6 @@ import React, {
     WebView,
 } from 'react-native';
 
-const CommentList = require('./CommentList');
 const Styles = require('../Styles');
 
 const DUMMY_HTML = `
