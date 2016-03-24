@@ -34,9 +34,15 @@ var DIM = {
         HEIGHT_NAVBAR:             50,
         HEIGHT_PAGEBAR:            50,
 
+        MARGIN_LOGIN:              30,
+        HEIGHT_LOGIN_TEXT_INPUT:   50,
+        MARGIN_LOGIN_TEXT_INPUT:   10,
+
         HEIGHT_LIST_SEP:           1,
         WIDTH_LIST_MARGIN:         0,
         PADDING_LIST:              5,
+
+        MARGIN_BUTTON:             5,
 
         NAV_BUTTON:                50,
 };
@@ -46,6 +52,10 @@ var FONT_FAMILY = 'Lato';
 var FONT_SIZE = {
         SPLASH:                    32,
         NAVBAR:                    16,
+
+        LOGIN_LABEL:               18,
+
+        BUTTON:                    22,
 
         TITLE:                     16,
 };
@@ -75,17 +85,38 @@ const styles = StyleSheet.create({
 
     loginView: {
         //backgroundColor: COLOR.RED,
-        marginTop: DIM.HEIGHT_NAVBAR,
-        marginBottom: DIM.HEIGHT_NAVBAR,
+        marginTop: DIM.MARGIN_LOGIN,
+        marginBottom: DIM.MARGIN_LOGIN,
         flex: 1,
         width: 300,
         alignItems: 'center',
         justifyContent: 'center'
     },
 
+    loginLabelText: {
+        color: COLOR.WHITE,
+        fontFamily: FONT_FAMILY,
+        fontSize: FONT_SIZE.LOGIN_LABEL,
+    },
+
     loginTextInput: {
-        height: DIM.HEIGHT_NAVBAR,
+        margin: DIM.MARGIN_LOGIN_TEXT_INPUT,
+        height: DIM.HEIGHT_LOGIN_TEXT_INPUT,
         backgroundColor: COLOR.WHITE,
+    },
+
+    button: {
+        margin: DIM.MARGIN_BUTTON,
+        borderColor: COLOR.WHITE,
+        borderWidth: 2,
+        borderRadius: 10,
+    },
+
+    buttonText: {
+        color: COLOR.WHITE,
+        fontFamily: FONT_FAMILY,
+        fontSize: FONT_SIZE.BUTTON,
+        margin: 5,
     },
 
     frontPageSpinner: {
