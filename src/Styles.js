@@ -28,8 +28,8 @@ var COLOR = {
 };
 
 var DIM = {
-        MARGIN_SPLASH_SPINNER:     50,
-        HEIGHT_SPLASH_SPINNER:     150,
+        MARGIN_SPINNER:            50,
+        HEIGHT_SPINNER:            150,
 
         HEIGHT_NAVBAR:             50,
         HEIGHT_PAGEBAR:            50,
@@ -51,7 +51,7 @@ var FONT_SIZE = {
 };
 
 const styles = StyleSheet.create({
-    splash: {
+    frontPage: {
         position: 'absolute',
         top: 0,
         left: 0,
@@ -59,19 +59,34 @@ const styles = StyleSheet.create({
         bottom: 0,
         alignItems: 'center',
         backgroundColor: COLOR.BLUE_MID,
-        justifyContent: 'center',
+        //justifyContent: 'center',
     },
 
-    splashText: {
+    frontPageTitleView: {
+        marginTop: DIM.HEIGHT_NAVBAR,
+        alignItems: 'center',
+    },
+
+    frontPageTitleText: {
         color: COLOR.WHITE,
         fontFamily: FONT_FAMILY,
         fontSize: FONT_SIZE.SPLASH,
     },
 
-    splashSpinner: {
+    loginView: {
+        //backgroundColor: COLOR.RED,
+        marginTop: DIM.HEIGHT_NAVBAR,
+        marginBottom: DIM.HEIGHT_NAVBAR,
+        flex: 1,
+        width: 300,
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+
+    frontPageSpinner: {
         backgroundColor: COLOR.TRANSPARENT,
-        marginTop: DIM.MARGIN_SPLASH_SPINNER,
-        height: DIM.HEIGHT_SPLASH_SPINNER,
+        marginTop: DIM.MARGIN_SPINNER,
+        height: DIM.HEIGHT_SPINNER,
     },
 
     navbar: {
