@@ -14,6 +14,8 @@ let singletonEnforcer = Symbol();
 
 let instance = null;
 
+const RESPONSE_DELAY = 1000;
+
 class ClientMock {
     constructor(enforcer) {
         if (enforcer != singletonEnforcer) {
@@ -41,7 +43,7 @@ class ClientMock {
                 var result = (username == 'test' && password == 'abc');
                 callback(result);
             },
-            500
+            RESPONSE_DELAY
         );
     }
 
@@ -53,7 +55,7 @@ class ClientMock {
 
         setTimeout(
             () => { callback(); },
-            500
+            RESPONSE_DELAY
         );
     }
 
@@ -99,7 +101,7 @@ class ClientMock {
                     ],
                 });
             },
-            500
+            RESPONSE_DELAY
         );
     }
 
@@ -142,7 +144,7 @@ class ClientMock {
                     discussions: discussions
                 });
             },
-            500
+            RESPONSE_DELAY
         );
     }
 };
