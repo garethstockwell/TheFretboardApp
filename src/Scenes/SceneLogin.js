@@ -9,6 +9,7 @@
 import React, {
     Component,
     Navigator,
+    Switch,
     Text,
     TextInput,
     TouchableHighlight,
@@ -26,14 +27,19 @@ class SceneLogin extends Component {
         this.state = {
             username: '',
             password: '',
-            waiting: false,
+            rememberMe: true,
+            status: '',
+            spinner: false,
         }
     }
 
     login() {
         console.log('LoginView.login');
 
-        this.setState({ waiting: true });
+        this.setState({
+            spinner: true,
+            status: 'Logging in',
+        });
 
         Client.logIn(
             this.state.username,
@@ -44,77 +50,157 @@ class SceneLogin extends Component {
     onLoginComplete(result) {
         console.log('SceneLogin.loginComplete ' + result);
 
-        this.setState({ waiting: false });
+        this.setState({ spinner: false });
 
         if (result) {
             this.props.onLoginComplete();
         } else {
-            // TODO: display 'login failed' message
+            this.setState({ status: 'Log in failed' });
         }
     }
 
-    _renderBody() {
-        if (this.state.waiting) {
+    _renderStatus() {
+        <View style={Styles.viewLoginStatus}>
+            <Text style={Styles.textLoginStatus}>
+                {this.state.status}
+            </Text>
+        </View>
+    }
+
+    _renderForm() {
+        if (this.state.spinner) {
             return (
-                <View style={Styles.loginView}>
-                    <View style={Styles.frontPageSpinner}>
+                <View style={Styles.viewLoginForm}>
+                    <View style={Styles.viewSpinner}>
                         <Spinner />
                     </View>
                 </View>
             );
         } else {
-            // TODO: rounded corners
-            // TODO: add 'continue as guest'
-            // TODO: add 'remember me' checkbox
+            // TODO: style is not respected when secureTextEntry == true
+            // https://github.com/facebook/react-native/issues/4435
+            // https://github.com/facebook/react-native/pull/6064
             return (
-                <View style={Styles.loginView}>
-                    <Text style={Styles.loginLabelText}>
-                        Username
-                    </Text>
+                <View style={Styles.viewLoginForm}>
+                    <View style={Styles.viewLoginFormRow}>
+                        <View style={Styles.viewLoginLabel}>
+                            <Text style={Styles.textLoginLabel}>
+                                Username
+                            </Text>
+                        </View>
 
-                    <TextInput
-                         style={Styles.loginTextInput}
-                         onChangeText={(text) => this.setState({username: text})}
-                    />
+                        <View style={Styles.viewLoginField}>
+                            <TextInput
+                                style={Styles.textInputLogin}
+                                underlineColorAndroid={'#ffffff'}
+                                onChangeText={(text) => this.setState({
+                                    username: text,
+                                    status: '',
+                                })}
+                                onSubmitEditing={(event) => {
+                                    this.refs.password.focus();
+                                }}
+                            />
+                        </View>
+                    </View>
 
-                    <Text style={Styles.loginLabelText}>
-                        Password
-                    </Text>
+                    <View style={Styles.viewLoginFormRow}>
+                        <View style={Styles.viewLoginLabel}>
+                            <Text style={Styles.textLoginLabel}>
+                                Password
+                            </Text>
+                        </View>
 
-                    <TextInput
-                         style={Styles.loginTextInput}
-                         secureTextEntry={true}
-                         onChangeText={(text) => this.setState({password: text})}
-                    />
+                        <View style={Styles.viewLoginField}>
+                            <TextInput
+                                ref='password'
+                                style={Styles.textInputLogin}
+                                underlineColorAndroid={'#ffffff'}
+                                secureTextEntry={true}
+                                onChangeText={(text) => this.setState({
+                                    password: text,
+                                    status: '',
+                                })}
+                                onSubmitEditing={(event) => {
+                                    this.login();
+                                }}
+                            />
+                        </View>
+                    </View>
 
-                    <Button
-                        onPress={() => this.login()}
-                        text={'Log in'}
-                    />
+                    <View style={Styles.viewLoginFormRow} />
 
-                    <Button
-                        onPress={() => this.props.onLoginComplete()}
-                        text={'Skip'}
-                    />
+                    <View style={Styles.viewLoginFormRow}>
+                        <View style={Styles.viewLoginLabel}>
+                            <Text style={Styles.textLoginLabel}>
+                                Remember me
+                            </Text>
+                        </View>
+
+                        <View style={Styles.viewLoginField}>
+                            <View style={Styles.viewLoginSwitch}>
+                                <Switch
+                                    style={Styles.switch}
+                                    value={this.state.rememberMe}
+                                    onValueChange={(value) => this.setState({
+                                        rememberMe: value,
+                                        status: '',
+                                    })}
+                                />
+                            </View>
+                            <View style={Styles.container} />
+                        </View>
+                    </View>
                 </View>
             );
         }
     }
 
+    _renderToolbar() {
+        return (
+            <View style={Styles.viewToolbar}>
+                <Button
+                    onPress={() => this.props.onLoginComplete()}
+                    text={'Skip'}
+                    textStyle={{textAlign: 'left'}}
+                />
+
+                <Button
+                    onPress={() => this.login()}
+                    text={'Log in'}
+                    textStyle={{textAlign: 'right'}}
+                />
+            </View>
+        );
+    }
+
     render() {
         return (
-            <View style={Styles.frontPage}>
-                <View style={Styles.frontPageTitleView}>
-                    <Text style={Styles.frontPageTitleText}>
+            <View style={Styles.viewLogin}>
+                <View style={Styles.viewLoginTitle}>
+                    <Text style={Styles.textLoginTitle}>
                         The Fretboard
                     </Text>
                 </View>
 
-                {this._renderBody()}
+                <View style={Styles.viewLoginBody}>
+                    <View style={Styles.container}>
+                        <View style={Styles.viewLoginStatus}>
+                            <Text style={Styles.textLoginStatus}>
+                                {this.state.status}
+                            </Text>
+                        </View>
+
+                        {this._renderForm()}
+
+                        <View style={Styles.viewLoginStatus} />
+                    </View>
+
+                    {this._renderToolbar()}
+                </View>
             </View>
         );
     }
 }
 
 module.exports = SceneLogin;
-
