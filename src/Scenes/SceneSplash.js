@@ -19,12 +19,12 @@ const Styles = require('../Styles');
 class SceneSplash extends Component {
     render() {
         return (
-            <View style={Styles.frontPage}>
-                <Text style={Styles.frontPageTitleText}>
+            <View style={Styles.viewLogin}>
+                <Text style={Styles.textLoginTitle}>
                     The Fretboard
                 </Text>
 
-                <View style={Styles.frontPageSpinner}>
+                <View style={Styles.container}>
                     <Spinner />
                 </View>
             </View>

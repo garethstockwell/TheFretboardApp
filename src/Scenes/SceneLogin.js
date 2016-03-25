@@ -26,14 +26,18 @@ class SceneLogin extends Component {
         this.state = {
             username: '',
             password: '',
-            waiting: false,
+            status: '',
+            spinner: false,
         }
     }
 
     login() {
         console.log('LoginView.login');
 
-        this.setState({ waiting: true });
+        this.setState({
+            spinner: true,
+            status: 'Logging in',
+        });
 
         Client.logIn(
             this.state.username,
@@ -44,58 +48,72 @@ class SceneLogin extends Component {
     onLoginComplete(result) {
         console.log('SceneLogin.loginComplete ' + result);
 
-        this.setState({ waiting: false });
+        this.setState({ spinner: false });
 
         if (result) {
             this.props.onLoginComplete();
         } else {
-            // TODO: display 'login failed' message
+            this.setState({ status: 'Log in failed' });
         }
     }
 
-    _renderBody() {
-        if (this.state.waiting) {
+    _renderForm() {
+        if (this.state.spinner) {
             return (
-                <View style={Styles.loginView}>
-                    <View style={Styles.frontPageSpinner}>
-                        <Spinner />
-                    </View>
+                <View style={Styles.viewLoginForm}>
+                    <Spinner />
                 </View>
             );
         } else {
-            // TODO: rounded corners
-            // TODO: add 'continue as guest'
             // TODO: add 'remember me' checkbox
             return (
-                <View style={Styles.loginView}>
-                    <Text style={Styles.loginLabelText}>
-                        Username
-                    </Text>
+                <View style={Styles.container}>
+                    <View style={Styles.viewLoginForm}>
+                        <View style={Styles.viewFormRow}>
+                            <View style={Styles.viewLoginLabel}>
+                                <Text style={Styles.textLoginLabel}>
+                                    Username
+                                </Text>
+                            </View>
 
-                    <TextInput
-                         style={Styles.loginTextInput}
-                         onChangeText={(text) => this.setState({username: text})}
-                    />
+                            <View style={Styles.viewLoginTextInput}>
+                                <TextInput
+                                     style={Styles.textInputLogin}
+                                     onChangeText={(text) => this.setState({
+                                         username: text,
+                                         status: '',
+                                     })}
+                                />
+                            </View>
+                        </View>
 
-                    <Text style={Styles.loginLabelText}>
-                        Password
-                    </Text>
+                        <View style={Styles.viewFormRow}>
+                            <Text style={Styles.textLoginLabel}>
+                                Password
+                            </Text>
 
-                    <TextInput
-                         style={Styles.loginTextInput}
-                         secureTextEntry={true}
-                         onChangeText={(text) => this.setState({password: text})}
-                    />
+                            <TextInput
+                                 style={Styles.textInputLogin}
+                                 secureTextEntry={true}
+                                 onChangeText={(text) => this.setState({
+                                     password: text,
+                                     status: '',
+                                 })}
+                            />
+                        </View>
+                    </View>
 
-                    <Button
-                        onPress={() => this.login()}
-                        text={'Log in'}
-                    />
+                    <View style={Styles.viewToolbar}>
+                        <Button
+                            onPress={() => this.props.onLoginComplete()}
+                            text={'Skip'}
+                        />
 
-                    <Button
-                        onPress={() => this.props.onLoginComplete()}
-                        text={'Skip'}
-                    />
+                        <Button
+                            onPress={() => this.login()}
+                            text={'Log in'}
+                        />
+                    </View>
                 </View>
             );
         }
@@ -103,18 +121,24 @@ class SceneLogin extends Component {
 
     render() {
         return (
-            <View style={Styles.frontPage}>
-                <View style={Styles.frontPageTitleView}>
-                    <Text style={Styles.frontPageTitleText}>
+            <View style={Styles.viewLogin}>
+                <View style={Styles.viewLoginTitle}>
+                    <Text style={Styles.textLoginTitle}>
                         The Fretboard
                     </Text>
                 </View>
 
-                {this._renderBody()}
+                <View style={Styles.viewLoginBody}>
+                    <View style={Styles.viewLoginStatus}>
+                        <Text style={Styles.textLoginStatus}>
+                            {this.state.status}
+                        </Text>
+                    </View>
+                    {this._renderForm()}
+                </View>
             </View>
         );
     }
 }
 
 module.exports = SceneLogin;
-

@@ -28,6 +28,22 @@ var COLOR = {
 };
 
 var DIM = {
+        HEIGHT_LOGIN_TITLE:        100,
+        HEIGHT_LOGIN_STATUS:       50,
+        HEIGHT_LOGIN_SPINNER:      200,
+
+        MARGIN_FORM_ROW:           10,
+
+        HEIGHT_TOOLBAR:            50,
+
+        PADDING_BUTTON:            5,
+        BORDER_WIDTH_BUTTON:       1,
+        BORDER_RADIUS_BUTTON:      5,
+        MARGIN_BUTTON:             20,
+        WIDTH_BUTTON:              150,
+};
+
+var DIM_LEGACY = {
         MARGIN_SPINNER:            50,
         HEIGHT_SPINNER:            150,
 
@@ -50,6 +66,14 @@ var DIM = {
 var FONT_FAMILY = 'Lato';
 
 var FONT_SIZE = {
+        LOGIN_TITLE:               32,
+        LOGIN_STATUS:              18,
+        LOGIN_LABEL:               18,
+
+        BUTTON:                    22,
+};
+
+var FONT_SIZE_LEGACY = {
         SPLASH:                    32,
         NAVBAR:                    16,
 
@@ -61,69 +85,129 @@ var FONT_SIZE = {
 };
 
 const styles = StyleSheet.create({
-    frontPage: {
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
+    container: {
+        flex: 1,
         alignItems: 'center',
+        justifyContent: 'center',
+    },
+
+    /*
+     * SceneLogin
+     */
+
+    viewLogin: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
         backgroundColor: COLOR.BLUE_MID,
-        //justifyContent: 'center',
     },
 
-    frontPageTitleView: {
-        marginTop: DIM.HEIGHT_NAVBAR,
+    viewLoginTitle: {
+        height: DIM.HEIGHT_LOGIN_TITLE,
         alignItems: 'center',
     },
 
-    frontPageTitleText: {
+    viewLoginBody: {
+        flex: 1,
+        alignSelf: 'stretch',
+        justifyContent: 'center',
+    },
+
+    viewLoginStatus: {
+        height: DIM.HEIGHT_LOGIN_STATUS,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+
+    viewLoginForm: {
+        backgroundColor: '#ffff00',
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+
+    textLoginTitle: {
         color: COLOR.WHITE,
         fontFamily: FONT_FAMILY,
-        fontSize: FONT_SIZE.SPLASH,
+        fontSize: FONT_SIZE.LOGIN_TITLE,
     },
 
-    loginView: {
-        //backgroundColor: COLOR.RED,
-        marginTop: DIM.MARGIN_LOGIN,
-        marginBottom: DIM.MARGIN_LOGIN,
+    textLoginStatus: {
+        color: COLOR.WHITE,
+        fontFamily: FONT_FAMILY,
+        fontSize: FONT_SIZE.LOGIN_STATUS,
+    },
+
+    viewLoginSpinner: {
+        height: DIM.HEIGHT_LOGIN_SPINNER
+    },
+
+    viewLoginLabel: {
+        width: 200,
+        backgroundColor: '#888888',
+    },
+
+    viewLoginTextInput: {
         flex: 1,
-        width: 300,
-        alignItems: 'center',
-        justifyContent: 'center'
     },
 
-    loginLabelText: {
+    textLoginLabel: {
         color: COLOR.WHITE,
         fontFamily: FONT_FAMILY,
         fontSize: FONT_SIZE.LOGIN_LABEL,
+        width: 100,
     },
 
-    loginTextInput: {
-        margin: DIM.MARGIN_LOGIN_TEXT_INPUT,
-        height: DIM.HEIGHT_LOGIN_TEXT_INPUT,
+    textInputLogin: {
+        margin: DIM_LEGACY.MARGIN_LOGIN_TEXT_INPUT,
+        height: DIM_LEGACY.HEIGHT_LOGIN_TEXT_INPUT,
         backgroundColor: COLOR.WHITE,
     },
 
-    button: {
-        margin: DIM.MARGIN_BUTTON,
-        borderColor: COLOR.WHITE,
-        borderWidth: 2,
-        borderRadius: 10,
-    },
+    /*
+     * Forms
+     */
 
-    buttonText: {
-        color: COLOR.WHITE,
-        fontFamily: FONT_FAMILY,
-        fontSize: FONT_SIZE.BUTTON,
-        margin: 5,
-    },
+     viewFormRow: {
+         alignItems: 'center',
+         justifyContent: 'center',
+         backgroundColor: '#ff0000',
+         marginTop: DIM.MARGIN_FORM_ROW,
+     },
 
-    frontPageSpinner: {
-        backgroundColor: COLOR.TRANSPARENT,
-        marginTop: DIM.MARGIN_SPINNER,
-        height: DIM.HEIGHT_SPINNER,
-    },
+    /*
+     * Toolbar
+     */
+
+     viewToolbar: {
+         backgroundColor: '#00ff00',
+         flexDirection: 'row',
+         height: DIM.HEIGHT_TOOLBAR,
+         justifyContent: 'center',
+         alignItems: 'stretch',
+     },
+
+     viewButton: {
+         width: DIM.WIDTH_BUTTON,
+         padding: DIM.PADDING_BUTTON,
+         backgroundColor: COLOR.TRANSPARENT,
+         borderColor: COLOR.WHITE,
+         borderWidth: DIM.BORDER_WIDTH_BUTTON,
+         borderRadius: DIM.BORDER_RADIUS_BUTTON,
+         marginLeft: DIM.MARGIN_BUTTON,
+         marginRight: DIM.MARGIN_BUTTON,
+     },
+
+     textButton: {
+         color: COLOR.WHITE,
+         fontFamily: FONT_FAMILY,
+         fontSize: FONT_SIZE.BUTTON,
+         textAlign: 'center',
+     },
+
+    /*
+     * Legacy
+     */
 
     navbar: {
         backgroundColor: COLOR.BLUE_DARK,
@@ -133,14 +217,7 @@ const styles = StyleSheet.create({
 
     body: {
         flex: 1,
-        marginTop: DIM.HEIGHT_NAVBAR,
-    },
-
-    container: {
-        alignItems: 'center',
-        backgroundColor: COLOR.GRAY_02,
-        flex: 1,
-        justifyContent: 'center',
+        marginTop: DIM_LEGACY.HEIGHT_NAVBAR,
     },
 
     listview: {
@@ -151,49 +228,49 @@ const styles = StyleSheet.create({
     li: {
         backgroundColor: COLOR.WHITE,
         borderWidth: 0,
-        marginLeft: DIM.WIDTH_LIST_MARGIN,
-        marginRight: DIM.WIDTH_LIST_MARGIN,
+        marginLeft: DIM_LEGACY.WIDTH_LIST_MARGIN,
+        marginRight: DIM_LEGACY.WIDTH_LIST_MARGIN,
         marginTop: 0,
-        marginBottom: DIM.HEIGHT_LIST_SEP,
-        padding: DIM.PADDING_LIST,
+        marginBottom: DIM_LEGACY.HEIGHT_LIST_SEP,
+        padding: DIM_LEGACY.PADDING_LIST,
     },
 
     liText: {
         color: COLOR.BLUE_DARK,
-        fontSize: FONT_SIZE.TITLE,
+        fontSize: FONT_SIZE_LEGACY.TITLE,
     },
 
     liSectionHeading: {
         backgroundColor: COLOR.BLUE_MID,
         borderWidth: 0,
-        marginLeft: DIM.WIDTH_LIST_MARGIN,
-        marginRight: DIM.WIDTH_LIST_MARGIN,
+        marginLeft: DIM_LEGACY.WIDTH_LIST_MARGIN,
+        marginRight: DIM_LEGACY.WIDTH_LIST_MARGIN,
         marginTop: 0,
-        marginBottom: DIM.HEIGHT_LIST_SEP,
-        padding: DIM.PADDING_LIST,
-        height: DIM.HEIGHT_PAGE_BAR,
+        marginBottom: DIM_LEGACY.HEIGHT_LIST_SEP,
+        padding: DIM_LEGACY.PADDING_LIST,
+        height: DIM_LEGACY.HEIGHT_PAGE_BAR,
     },
 
     liSectionHeadingText: {
         color: COLOR.WHITE,
-        fontSize: FONT_SIZE.TITLE,
+        fontSize: FONT_SIZE_LEGACY.TITLE,
         fontWeight: 'bold',
     },
 
     liPageBar: {
         backgroundColor: COLOR.BLUE_MID,
         borderWidth: 0,
-        marginLeft: DIM.WIDTH_LIST_MARGIN,
-        marginRight: DIM.WIDTH_LIST_MARGIN,
+        marginLeft: DIM_LEGACY.WIDTH_LIST_MARGIN,
+        marginRight: DIM_LEGACY.WIDTH_LIST_MARGIN,
         marginTop: 0,
-        marginBottom: DIM.HEIGHT_LIST_SEP,
-        padding: DIM.PADDING_LIST,
-        height: DIM.HEIGHT_PAGE_BAR,
+        marginBottom: DIM_LEGACY.HEIGHT_LIST_SEP,
+        padding: DIM_LEGACY.PADDING_LIST,
+        height: DIM_LEGACY.HEIGHT_PAGE_BAR,
     },
 
     liPageBarText: {
         color: COLOR.WHITE,
-        fontSize: FONT_SIZE.TITLE,
+        fontSize: FONT_SIZE_LEGACY.TITLE,
         fontWeight: 'bold',
     },
 
@@ -214,24 +291,24 @@ const styles = StyleSheet.create({
 
     navText: {
         color: COLOR.WHITE,
-        fontSize: FONT_SIZE.TITLE,
+        fontSize: FONT_SIZE_LEGACY.TITLE,
     },
 
     titleView: {
-        height: 2 * DIM.HEIGHT_NAVBAR,
+        height: 2 * DIM_LEGACY.HEIGHT_NAVBAR,
         backgroundColor: COLOR.BLUE_MID,
         alignItems: 'center',
     },
 
     titleText: {
         color: COLOR.WHITE,
-        fontSize: FONT_SIZE.TITLE,
+        fontSize: FONT_SIZE_LEGACY.TITLE,
         fontWeight: 'bold',
     },
 
     todoText: {
         color: COLOR.RED,
-        fontSize: FONT_SIZE.TITLE,
+        fontSize: FONT_SIZE_LEGACY.TITLE,
         fontWeight: 'bold',
     },
 
@@ -239,7 +316,7 @@ const styles = StyleSheet.create({
         position: 'absolute',
         top: 0,
         left: 0,
-        width: DIM.NAV_BUTTON,
+        width: DIM_LEGACY.NAV_BUTTON,
     },
 
     pageBarCenter: {
@@ -251,9 +328,8 @@ const styles = StyleSheet.create({
         position: 'absolute',
         top: 0,
         right: 0,
-        width: DIM.NAV_BUTTON,
+        width: DIM_LEGACY.NAV_BUTTON,
     },
 });
 
 module.exports = styles;
-
