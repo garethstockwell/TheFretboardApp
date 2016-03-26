@@ -9,10 +9,6 @@ This file captures miscellaneous TODO items which are not recorded in the REQUIR
    * Move to ApiUtils module
    * Use in ClientMock
 * Pass Client via props; remove singleton
-* Custom NavigatorBar
-   * Menu button
-   * Title
-   * Notification icon
 * "Dev build" Flag
    * Show a message on the login screen
    * Use dev server URL
