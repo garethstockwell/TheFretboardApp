@@ -6,7 +6,6 @@
 
 import React, {
     Component,
-    PropTypes,
     Text,
     TouchableWithoutFeedback,
     View,

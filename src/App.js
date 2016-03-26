@@ -15,7 +15,8 @@ import React, {
 
 import Client from './Client/Client';
 
-const NavigationBar = require('./Components/NavigationBarBreadcrumb');
+const NavigationBar = require('./Components/NavigationBar');
+//const NavigationBar = require('./Components/NavigationBarBreadcrumb');
 const SceneCategoryList = require('./Scenes/SceneCategoryList');
 const SceneCategory = require('./Scenes/SceneCategory');
 const SceneDiscussion = require('./Scenes/SceneDiscussion');
@@ -49,6 +50,19 @@ class App extends Component {
         }
     }
 
+    _onPressMenu(navigator) {
+        console.log('App.onPressMenu ' + navigator);
+        this.setState({login: true});
+    }
+
+    _navigationBar() {
+        return (
+            <NavigationBar
+                onPressMenu={this._onPressMenu.bind(this)}
+            />
+        )
+    }
+
     _loginComplete() {
         this.setState({ login: false });
     }
@@ -72,9 +86,9 @@ class App extends Component {
                 }}
                 initialRoute={{
                     id: 'SceneCategoryList',
-                    title: 'Home',
+                    title: 'Categories',
                 }}
-                navigationBar={NavigationBar}
+                navigationBar={this._navigationBar()}
                 renderScene={this.renderScene.bind(this)}
             />
         );
@@ -104,7 +118,7 @@ class App extends Component {
             return (
                 <SceneCategoryList
                     navigator={navigator}
-                    navigationBar={NavigationBar}
+                    navigationBar={this._navigationBar()}
                     {...route.passProps}
                 />
             );
@@ -114,7 +128,7 @@ class App extends Component {
             return (
                 <SceneCategory
                     navigator={navigator}
-                    navigationBar={NavigationBar}
+                    navigationBar={this._navigationBar()}
                     {...route.passProps}
                 />
             );
@@ -124,7 +138,7 @@ class App extends Component {
             return (
                 <SceneDiscussion
                     navigator={navigator}
-                    navigationBar={NavigationBar}
+                    navigationBar={this._navigationBar()}
                     {...route.passProps}
                 />
             );

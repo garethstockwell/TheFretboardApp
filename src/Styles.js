@@ -8,6 +8,8 @@ import React, {
     StyleSheet,
 } from 'react-native';
 
+import Dimensions from 'Dimensions';
+
 var COLOR = {
         TRANSPARENT:               'rgba(0,0,0,0)',
 
@@ -37,6 +39,9 @@ var DIM = {
         HEIGHT_LOGIN_FIELD:        50,
         WIDTH_LOGIN_DIVIDER:       2,
         WIDTH_LOGIN_SWITCH:        50,
+
+        HEIGHT_NAVBAR:             50,
+        WIDTH_NAVBAR_BUTTON:       50,
 
         HEIGHT_TOOLBAR:            50,
 
@@ -71,6 +76,9 @@ var FONT_SIZE = {
         LOGIN_TITLE:               32,
         LOGIN_STATUS:              18,
         LOGIN_LABEL:               18,
+
+        NAVBAR_TITLE:              20,
+        NAVBAR_BUTTON:             16,
 
         BUTTON:                    20,
 };
@@ -182,10 +190,48 @@ const styles = StyleSheet.create({
     },
 
     /*
-     * Forms
+     * NavigatorBar
      */
 
+     viewNavbar: {
+         position: 'absolute',
+         top: 0,
+         height: DIM.HEIGHT_NAVBAR,
+         width: Dimensions.get('window').width,
+         backgroundColor: COLOR.BLUE_DARK,
+         flexDirection: 'row',
+         alignItems: 'center',
+         justifyContent: 'center',
+     },
 
+     viewNavbarButton: {
+         width: DIM.WIDTH_NAVBAR_BUTTON,
+         alignSelf: 'stretch',
+         alignItems: 'center',
+         justifyContent: 'center',
+         borderWidth: DIM.BORDER_WIDTH_BUTTON,
+         borderColor: COLOR.WHITE,
+     },
+
+     viewNavbarTitle: {
+         flex: 1,
+         alignSelf: 'stretch',
+         alignItems: 'center',
+         justifyContent: 'center',
+     },
+
+     // Temporary, until we have icons
+     textNavbarButton: {
+         color: COLOR.WHITE,
+         fontFamily: FONT_FAMILY,
+         fontSize: FONT_SIZE.NAVBAR_BUTTON,
+     },
+
+     textNavbarTitle: {
+         color: COLOR.WHITE,
+         fontFamily: FONT_FAMILY,
+         fontSize: FONT_SIZE.NAVBAR_TITLE,
+     },
 
     /*
      * Toolbar
