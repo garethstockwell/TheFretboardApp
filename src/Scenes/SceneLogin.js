@@ -9,6 +9,7 @@
 import React, {
     Component,
     Navigator,
+    Switch,
     Text,
     TextInput,
     TouchableHighlight,
@@ -26,6 +27,7 @@ class SceneLogin extends Component {
         this.state = {
             username: '',
             password: '',
+            rememberMe: true,
             status: '',
             spinner: false,
         }
@@ -57,66 +59,119 @@ class SceneLogin extends Component {
         }
     }
 
+    _renderStatus() {
+        <View style={Styles.viewLoginStatus}>
+            <Text style={Styles.textLoginStatus}>
+                {this.state.status}
+            </Text>
+        </View>
+    }
+
     _renderForm() {
         if (this.state.spinner) {
             return (
                 <View style={Styles.viewLoginForm}>
-                    <Spinner />
+                    <View style={Styles.viewSpinner}>
+                        <Spinner />
+                    </View>
                 </View>
             );
         } else {
-            // TODO: add 'remember me' checkbox
+            // TODO: style is not respected when secureTextEntry == true
+            // https://github.com/facebook/react-native/issues/4435
+            // https://github.com/facebook/react-native/pull/6064
             return (
-                <View style={Styles.container}>
-                    <View style={Styles.viewLoginForm}>
-                        <View style={Styles.viewFormRow}>
-                            <View style={Styles.viewLoginLabel}>
-                                <Text style={Styles.textLoginLabel}>
-                                    Username
-                                </Text>
-                            </View>
-
-                            <View style={Styles.viewLoginTextInput}>
-                                <TextInput
-                                     style={Styles.textInputLogin}
-                                     onChangeText={(text) => this.setState({
-                                         username: text,
-                                         status: '',
-                                     })}
-                                />
-                            </View>
+                <View style={Styles.viewLoginForm}>
+                    <View style={Styles.viewLoginFormRow}>
+                        <View style={Styles.viewLoginLabel}>
+                            <Text style={Styles.textLoginLabel}>
+                                Username
+                            </Text>
                         </View>
 
-                        <View style={Styles.viewFormRow}>
-                            <Text style={Styles.textLoginLabel}>
-                                Password
-                            </Text>
-
+                        <View style={Styles.viewLoginField}>
                             <TextInput
-                                 style={Styles.textInputLogin}
-                                 secureTextEntry={true}
-                                 onChangeText={(text) => this.setState({
-                                     password: text,
-                                     status: '',
-                                 })}
+                                style={Styles.textInputLogin}
+                                underlineColorAndroid={'#ffffff'}
+                                onChangeText={(text) => this.setState({
+                                    username: text,
+                                    status: '',
+                                })}
+                                onSubmitEditing={(event) => {
+                                    this.refs.password.focus();
+                                }}
                             />
                         </View>
                     </View>
 
-                    <View style={Styles.viewToolbar}>
-                        <Button
-                            onPress={() => this.props.onLoginComplete()}
-                            text={'Skip'}
-                        />
+                    <View style={Styles.viewLoginFormRow}>
+                        <View style={Styles.viewLoginLabel}>
+                            <Text style={Styles.textLoginLabel}>
+                                Password
+                            </Text>
+                        </View>
 
-                        <Button
-                            onPress={() => this.login()}
-                            text={'Log in'}
-                        />
+                        <View style={Styles.viewLoginField}>
+                            <TextInput
+                                ref='password'
+                                style={Styles.textInputLogin}
+                                underlineColorAndroid={'#ffffff'}
+                                secureTextEntry={true}
+                                onChangeText={(text) => this.setState({
+                                    password: text,
+                                    status: '',
+                                })}
+                                onSubmitEditing={(event) => {
+                                    this.login();
+                                }}
+                            />
+                        </View>
+                    </View>
+
+                    <View style={Styles.viewLoginFormRow} />
+
+                    <View style={Styles.viewLoginFormRow}>
+                        <View style={Styles.viewLoginLabel}>
+                            <Text style={Styles.textLoginLabel}>
+                                Remember me
+                            </Text>
+                        </View>
+
+                        <View style={Styles.viewLoginField}>
+                            <View style={Styles.viewLoginSwitch}>
+                                <Switch
+                                    style={Styles.switch}
+                                    value={this.state.rememberMe}
+                                    onValueChange={(value) => this.setState({
+                                        rememberMe: value,
+                                        status: '',
+                                    })}
+                                />
+                            </View>
+                            <View style={Styles.container} />
+                        </View>
                     </View>
                 </View>
             );
         }
+    }
+
+    _renderToolbar() {
+        return (
+            <View style={Styles.viewToolbar}>
+                <Button
+                    onPress={() => this.props.onLoginComplete()}
+                    text={'Skip'}
+                    textStyle={{textAlign: 'left'}}
+                />
+
+                <Button
+                    onPress={() => this.login()}
+                    text={'Log in'}
+                    textStyle={{textAlign: 'right'}}
+                />
+            </View>
+        );
     }
 
     render() {
@@ -129,12 +184,19 @@ class SceneLogin extends Component {
                 </View>
 
                 <View style={Styles.viewLoginBody}>
-                    <View style={Styles.viewLoginStatus}>
-                        <Text style={Styles.textLoginStatus}>
-                            {this.state.status}
-                        </Text>
+                    <View style={Styles.container}>
+                        <View style={Styles.viewLoginStatus}>
+                            <Text style={Styles.textLoginStatus}>
+                                {this.state.status}
+                            </Text>
+                        </View>
+
+                        {this._renderForm()}
+
+                        <View style={Styles.viewLoginStatus} />
                     </View>
-                    {this._renderForm()}
+
+                    {this._renderToolbar()}
                 </View>
             </View>
         );

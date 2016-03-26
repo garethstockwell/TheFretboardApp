@@ -19,7 +19,7 @@ class Button extends React.Component {
         return (
             <View style={Styles.viewButton}>
                 <TouchableHighlight onPress={() => this.props.onPress()}>
-                    <Text style={Styles.textButton}>
+                    <Text style={[Styles.textButton, this.props.textStyle]}>
                         {this.props.text}
                     </Text>
                 </TouchableHighlight>
