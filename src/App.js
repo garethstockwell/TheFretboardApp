@@ -15,7 +15,8 @@ import React, {
 
 import Client from './Client/Client';
 
-const NavigationBar = require('./Components/NavigationBarBreadcrumb');
+const NavigationBar = require('./Components/NavigationBar');
+//const NavigationBar = require('./Components/NavigationBarBreadcrumb');
 const SceneCategoryList = require('./Scenes/SceneCategoryList');
 const SceneCategory = require('./Scenes/SceneCategory');
 const SceneDiscussion = require('./Scenes/SceneDiscussion');
