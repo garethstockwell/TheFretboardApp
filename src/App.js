@@ -50,6 +50,19 @@ class App extends Component {
         }
     }
 
+    _onPressMenu(navigator) {
+        console.log('App.onPressMenu ' + navigator);
+        this.setState({login: true});
+    }
+
+    _navigationBar() {
+        return (
+            <NavigationBar
+                onPressMenu={this._onPressMenu.bind(this)}
+            />
+        )
+    }
+
     _loginComplete() {
         this.setState({ login: false });
     }
@@ -75,7 +88,7 @@ class App extends Component {
                     id: 'SceneCategoryList',
                     title: 'Home',
                 }}
-                navigationBar={NavigationBar}
+                navigationBar={this._navigationBar()}
                 renderScene={this.renderScene.bind(this)}
             />
         );
@@ -105,7 +118,7 @@ class App extends Component {
             return (
                 <SceneCategoryList
                     navigator={navigator}
-                    navigationBar={NavigationBar}
+                    navigationBar={this._navigationBar()}
                     {...route.passProps}
                 />
             );
@@ -115,7 +128,7 @@ class App extends Component {
             return (
                 <SceneCategory
                     navigator={navigator}
-                    navigationBar={NavigationBar}
+                    navigationBar={this._navigationBar()}
                     {...route.passProps}
                 />
             );
@@ -125,7 +138,7 @@ class App extends Component {
             return (
                 <SceneDiscussion
                     navigator={navigator}
-                    navigationBar={NavigationBar}
+                    navigationBar={this._navigationBar()}
                     {...route.passProps}
                 />
             );

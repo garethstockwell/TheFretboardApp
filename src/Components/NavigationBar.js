@@ -25,17 +25,16 @@ class NavigationBar extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            title: 'TEST',
+            title: '',
         };
     }
 
     render() {
-        console.log('HELLO');
         return (
             <View style={Styles.viewNavbar}>
                 <View style={Styles.viewNavbarButton}>
                     <TouchableWithoutFeedback
-                        onPress={() => this.props.onPressMenu()}
+                        onPress={() => this.props.onPressMenu(this.props.navigator)}
                     >
                         <Text style={Styles.textNavbarButton}>
                             Menu
@@ -59,6 +58,4 @@ class NavigationBar extends React.Component {
     }
 };
 
-module.exports = (
-    <NavigationBar />
-);
+module.exports = NavigationBar;
