@@ -12,7 +12,6 @@ import React, {
     Switch,
     Text,
     TextInput,
-    TouchableHighlight,
     View,
 } from 'react-native';
 
