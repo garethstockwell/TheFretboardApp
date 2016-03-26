@@ -21,6 +21,14 @@ const Button = require('../Components/Button');
 const Spinner = require('../Components/Spinner');
 const Styles = require('../Styles');
 
+/*! Scene which displays a login form
+ *
+ *  propTypes:
+ *      ...Scene.propTypes
+ *
+ *      onLoginComplete: function(bool)
+ *          required: true
+ */
 class SceneLogin extends Component {
     constructor(props) {
         super(props);
@@ -161,7 +169,7 @@ class SceneLogin extends Component {
             <View style={Styles.viewToolbar}>
                 <Button
                     onPress={() => this.props.onLoginComplete()}
-                    text={'Skip'}
+                    text={'Continue as guest'}
                     textStyle={{textAlign: 'left'}}
                 />
 

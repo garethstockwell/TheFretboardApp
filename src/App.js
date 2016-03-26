@@ -20,7 +20,6 @@ const SceneCategoryList = require('./Scenes/SceneCategoryList');
 const SceneCategory = require('./Scenes/SceneCategory');
 const SceneDiscussion = require('./Scenes/SceneDiscussion');
 const SceneLogin = require('./Scenes/SceneLogin');
-const SceneSplash = require('./Scenes/SceneSplash');
 const Styles = require('./Styles');
 
 // Based on
@@ -48,12 +47,6 @@ class App extends Component {
         this.state = {
             login: true,
         }
-    }
-
-    _renderSplash() {
-        return (
-            <SceneSplash />
-        );
     }
 
     _loginComplete() {
@@ -97,15 +90,6 @@ class App extends Component {
 
     renderScene(route, navigator) {
         androidAddBackButtonListener(navigator);
-
-        if (route.id === 'SceneSplash') {
-            return (
-                <SceneSplash
-                    navigator={navigator}
-                    {...route.passProps}
-                />
-            );
-        }
 
         if (route.id === 'SceneLogin') {
             return (

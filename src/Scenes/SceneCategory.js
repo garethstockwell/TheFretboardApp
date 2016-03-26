@@ -14,6 +14,14 @@ const DiscussionList = require('../Components/DiscussionList');
 const Scene = require('./Scene');
 const Styles = require('../Styles')
 
+/*! Scene which displays discussions in a category
+ *
+ *  propTypes:
+ *      ...Scene.propTypes
+ *
+ *      categoryData: object
+ *          required: true
+ */
 class SceneCategory extends Scene {
     _onPressDiscussion(discussionData) {
         this.props.navigator.push({

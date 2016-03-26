@@ -9,14 +9,24 @@
 import React, {
     Component,
     Navigator,
-    Text, // DEBUGGING
     View,
 } from 'react-native';
 
 const Spinner = require('../Components/Spinner');
 const Styles = require('../Styles');
 
-class Scene extends Component {
+/*! Base class for scenes
+ *
+ *  propTypes:
+ *      ...View.propTypes
+ *
+ *      navigationBar: NavigationBar
+ *          required: true
+ *
+ *      navigator: Navigator
+ *          required: true
+ */
+class Scene extends React.Component {
     constructor(props) {
         super(props);
         this.state = {

@@ -15,6 +15,23 @@ const DiscussionListItem = require('./DiscussionListItem');
 const ListViewPaged = require('./ListViewPaged');
 const Styles = require('../Styles');
 
+/*! List of discussions
+ *
+ *  propTypes:
+ *      ...View.propTypes
+ *
+ *      categoryData: object
+ *          required: true
+ *
+ *      currentPage: int
+ *          required: false
+ *
+ *      onLoadingChanged: function(bool)
+ *          required: false
+ *
+ *      onPress: function(object)
+ *          required: false
+ */
 class DiscussionList extends React.Component {
     constructor(props) {
         super(props);
