@@ -1,5 +1,5 @@
 /**
- * NavigationBar
+ * NavigationBarBreadcrumb
  */
 
 'use strict';
