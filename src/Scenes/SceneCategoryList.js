@@ -28,7 +28,7 @@ class SceneCategoryList extends Scene {
             passProps: {
                 categoryData: categoryData,
             },
-        })
+        });
     }
 
     renderBody() {

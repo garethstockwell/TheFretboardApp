@@ -30,6 +30,8 @@ var COLOR = {
 };
 
 var DIM = {
+        MARGIN_VIEW:               10,
+
         MARGIN_LOGIN:              10,
         HEIGHT_LOGIN_TITLE:        70,
         HEIGHT_LOGIN_STATUS:       50,
@@ -94,10 +96,29 @@ var FONT_SIZE_LEGACY = {
 };
 
 const styles = StyleSheet.create({
-    container: {
+    /*
+     * Misc
+     */
+
+    viewSpinner: {
+        height: 100,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+
+    switch: {
+
+    },
+
+    viewContainer: {
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
+    },
+
+    viewMargin: {
+        flex: 1,
+        margin: DIM.MARGIN_VIEW,
     },
 
     /*
@@ -258,35 +279,29 @@ const styles = StyleSheet.create({
      },
 
     /*
-     * Misc
+     * Scene
      */
 
-     viewSpinner: {
-         height: 100,
-         alignItems: 'center',
-         justifyContent: 'center',
+     viewSceneBody: {
+         flex: 1,
+         marginTop: DIM.HEIGHT_NAVBAR,
      },
 
-     switch: {
-         //backgroundColor: COLOR.RED,
-         borderColor: '#ffff00',
-     },
+    /*
+     * Scene
+     */
+
+    viewDialog: {
+        flex: 1,
+        backgroundColor: COLOR.BLUE_DARK,
+        alignSelf: 'stretch',
+        justifyContent: 'center',
+    },
 
 
     /*
      * Legacy
      */
-
-    navbar: {
-        backgroundColor: COLOR.BLUE_DARK,
-        position: 'absolute',
-        top: 0,
-    },
-
-    body: {
-        flex: 1,
-        marginTop: DIM_LEGACY.HEIGHT_NAVBAR,
-    },
 
     listview: {
         flex: 1,

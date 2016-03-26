@@ -30,7 +30,7 @@ class Scene extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            loading: true,
+            loading: false,
             hideNavBar: false,
         }
     }
@@ -73,7 +73,7 @@ class Scene extends React.Component {
         }
 
         return (
-            <View style={Styles.body}>
+            <View style={Styles.viewSceneBody}>
                 {this.renderBody()}
                 {this._renderLoading()}
             </View>
