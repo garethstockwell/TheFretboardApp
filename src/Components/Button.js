@@ -28,7 +28,7 @@ class Button extends React.Component {
     render() {
         // TODO: 'enabled' property - grey out button and suppress clicks unless enabled
         return (
-            <View style={Styles.viewButton}>
+            <View style={[Styles.viewButton, this.props.style]}>
                 <TouchableWithoutFeedback onPress={() => this.props.onPress()}>
                     <Text style={[Styles.textButton, this.props.textStyle]}>
                         {this.props.text}

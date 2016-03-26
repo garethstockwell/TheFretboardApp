@@ -25,7 +25,7 @@ const Styles = require('../Styles');
  *  propTypes:
  *      ...Scene.propTypes
  *
- *      onLoginComplete: function(bool)
+ *      onLoginComplete: function(string)
  *          required: true
  */
 class SceneLogin extends Component {
@@ -60,7 +60,8 @@ class SceneLogin extends Component {
         this.setState({ spinner: false });
 
         if (result) {
-            this.props.onLoginComplete();
+            console.log('XXX ' + this.state.username);
+            this.props.onLoginComplete(this.state.username);
         } else {
             this.setState({ status: 'Log in failed' });
         }
@@ -167,12 +168,14 @@ class SceneLogin extends Component {
         return (
             <View style={Styles.viewToolbar}>
                 <Button
+                    style={Styles.buttonLogin}
                     onPress={() => this.props.onLoginComplete()}
                     text={'Continue as guest'}
                     textStyle={{textAlign: 'left'}}
                 />
 
                 <Button
+                    style={Styles.buttonLogin}
                     onPress={() => this.login()}
                     text={'Log in'}
                     textStyle={{textAlign: 'right'}}
