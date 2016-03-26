@@ -155,7 +155,7 @@ class SceneLogin extends Component {
                                     })}
                                 />
                             </View>
-                            <View style={Styles.container} />
+                            <View style={Styles.viewContainer} />
                         </View>
                     </View>
                 </View>
@@ -191,7 +191,7 @@ class SceneLogin extends Component {
                 </View>
 
                 <View style={Styles.viewLoginBody}>
-                    <View style={Styles.container}>
+                    <View style={Styles.viewContainer}>
                         <View style={Styles.viewLoginStatus}>
                             <Text style={Styles.textLoginStatus}>
                                 {this.state.status}
