@@ -25,8 +25,17 @@ class NavigationBar extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            title: '',
         };
+    }
+
+    _title() {
+        var navState = this.props.navState;
+        var routes = navState.routeStack;
+        if (routes.length) {
+            var route = routes[routes.length - 1];
+            return route.title;
+        }
+        return '';
     }
 
     render() {
@@ -44,7 +53,7 @@ class NavigationBar extends React.Component {
 
                 <View style={Styles.viewNavbarTitle}>
                     <Text style={Styles.textNavbarTitle}>
-                        {this.state.title}
+                        {this._title()}
                     </Text>
                 </View>
 

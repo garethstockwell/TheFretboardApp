@@ -86,7 +86,7 @@ class App extends Component {
                 }}
                 initialRoute={{
                     id: 'SceneCategoryList',
-                    title: 'Home',
+                    title: 'Categories',
                 }}
                 navigationBar={this._navigationBar()}
                 renderScene={this.renderScene.bind(this)}
