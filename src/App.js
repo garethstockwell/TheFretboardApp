@@ -44,20 +44,28 @@ function androidAddBackButtonListener(navigator) {
 class App extends Component {
     constructor(props) {
         console.log('--- TheFretboardApp starting ---');
-
         super(props);
+
         this.state = {
             login: true,
-        }
+            username: null,
+        };
+    }
+
+    // State which is exported to other components
+    _state() {
+        return {
+            username: this.state.username,
+        };
     }
 
     _onPressMenu(navigator) {
         console.log('App.onPressMenu ' + navigator);
-        //this.setState({login: true});
 
         navigator.push({
             id: 'SceneMenu',
             title: 'Menu',
+
             // Should be FloatFromBottom, but this isn't implemented
             //sceneConfig: Navigator.SceneConfigs.FadeAndroid,
 
@@ -76,11 +84,18 @@ class App extends Component {
     }
 
     _logOut() {
-        this.setState({ login: true });
+        this.setState({
+            username: null,
+            login: true
+        });
     }
 
-    _loginComplete() {
-        this.setState({ login: false });
+    _loginComplete(username) {
+        console.log('App.loginComplete username ' + username)
+        this.setState({
+            username: username,
+            login: false,
+        });
     }
 
     _renderLogin() {
@@ -135,6 +150,7 @@ class App extends Component {
                 <SceneMenu
                     navigator={navigator}
                     navigationBar={this._navigationBar()}
+                    appState={this._state()}
                     {...route.passProps}
                 />
             );

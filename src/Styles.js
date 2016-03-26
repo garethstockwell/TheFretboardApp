@@ -30,7 +30,9 @@ var COLOR = {
 };
 
 var DIM = {
-        MARGIN_VIEW:               10,
+        MARGIN_VIEW:               5,
+
+        INDENT:                    20,
 
         MARGIN_LOGIN:              10,
         HEIGHT_LOGIN_TITLE:        70,
@@ -46,6 +48,10 @@ var DIM = {
         WIDTH_NAVBAR_BUTTON:       50,
 
         HEIGHT_TOOLBAR:            50,
+
+        WIDTH_DIALOG_DIVIDER:      2,
+        SEP_DIALOG_SECTION:        20,
+        SEP_DIALOG_ITEM:           10,
 
         PADDING_BUTTON:            5,
         BORDER_WIDTH_BUTTON:       1,
@@ -82,7 +88,10 @@ var FONT_SIZE = {
         NAVBAR_TITLE:              20,
         NAVBAR_BUTTON:             16,
 
-        BUTTON:                    20,
+        DIALOG_HEADING:            16,
+        DIALOG_ITEM:               14,
+
+        BUTTON:                    16,
 };
 
 var FONT_SIZE_LEGACY = {
@@ -210,6 +219,11 @@ const styles = StyleSheet.create({
         color: COLOR.WHITE,
     },
 
+    buttonLogin: {
+        flex: 1,
+        marginTop: DIM.MARGIN_BUTTON,
+    },
+
     /*
      * NavigatorBar
      */
@@ -230,8 +244,8 @@ const styles = StyleSheet.create({
          alignSelf: 'stretch',
          alignItems: 'center',
          justifyContent: 'center',
-         borderWidth: DIM.BORDER_WIDTH_BUTTON,
-         borderColor: COLOR.WHITE,
+         //borderWidth: DIM.BORDER_WIDTH_BUTTON,
+         //borderColor: COLOR.WHITE,
      },
 
      viewNavbarTitle: {
@@ -267,8 +281,7 @@ const styles = StyleSheet.create({
      },
 
      viewButton: {
-         flex: 1,
-         marginTop: DIM.MARGIN_BUTTON,
+
      },
 
      textButton: {
@@ -288,16 +301,48 @@ const styles = StyleSheet.create({
      },
 
     /*
-     * Scene
+     * SceneDialog
      */
 
-    viewDialog: {
+    scrollViewDialog: {
         flex: 1,
         backgroundColor: COLOR.BLUE_DARK,
         alignSelf: 'stretch',
-        justifyContent: 'center',
     },
 
+    viewDialogHeading: {
+        flex: 1,
+        borderBottomColor: COLOR.GRAY_02,
+        borderBottomWidth: DIM.WIDTH_DIALOG_DIVIDER,
+    },
+
+    textDialogHeading: {
+        color: COLOR.GRAY_02,
+        fontWeight: 'bold',
+        fontSize: FONT_SIZE.DIALOG_HEADING,
+        textAlign: 'left',
+    },
+
+    viewDialogRow: {
+        flex: 1,
+        alignSelf: 'stretch',
+        marginLeft: DIM.INDENT,
+        marginTop: DIM.SEP_DIALOG_ITEM,
+        flexDirection: 'row',
+    },
+
+    textDialogItem: {
+        color: COLOR.GRAY_02,
+        fontSize: FONT_SIZE.DIALOG_ITEM,
+        fontStyle: 'italic',
+        textAlign: 'left',
+    },
+
+    viewDialogSectionSpacer: {
+        flex: 1,
+        alignSelf: 'stretch',
+        height: DIM.SEP_DIALOG_SECTION,
+    },
 
     /*
      * Legacy
