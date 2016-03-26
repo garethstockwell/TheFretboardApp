@@ -15,6 +15,17 @@ const CategoryListItem = require('./CategoryListItem');
 const ListViewSectioned = require('./ListViewSectioned');
 const Styles = require('../Styles');
 
+/*! List of discussion categories
+ *
+ *  propTypes:
+ *      ...View.propTypes
+ *
+ *      onLoadingChanged: function(bool)
+ *          required: false
+ *
+ *      onPress: function(object)
+ *          required: false
+ */
 class CategoryList extends React.Component {
     constructor(props) {
         super(props);

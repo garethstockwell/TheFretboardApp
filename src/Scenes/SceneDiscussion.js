@@ -15,6 +15,14 @@ const Discussion = require('../Components/Discussion');
 const Scene = require('./Scene');
 const Styles = require('../Styles');
 
+/*! Scene which displays a discussion
+ *
+ *  propTypes:
+ *      ...Scene.propTypes
+ *
+ *      discussionData: object
+ *          required: true
+ */
 class SceneDiscussion extends Scene {
     renderBody() {
         console.log('SceneDiscussion.renderBody ' + this.props.discussionData);

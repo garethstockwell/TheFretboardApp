@@ -13,6 +13,14 @@ import React, {
 
 const Styles = require('../Styles');
 
+/*! Entry in list of categories
+ *
+ *  propTypes:
+ *      ...View.propTypes
+ *
+ *      categoryData: object
+ *          required: true
+ */
 class CategoryListItem extends React.Component {
     render() {
         var CountAllDiscussions = '';

@@ -15,6 +15,20 @@ import React, {
 
 const Styles = require('../Styles');
 
+/*! Bar for navigating between pages within paginated lists
+ *
+ *  propTypes:
+ *      ...View.propTypes
+ *
+ *      currentPage: int
+ *          required: true
+ *
+ *      goToPage: function(int)
+ *          required: true
+ *
+ *      numPages: int
+ *          required: true
+ */
 class PageBar extends React.Component {
     _goToPrev() {
         console.log('PageBar._goToPrev');

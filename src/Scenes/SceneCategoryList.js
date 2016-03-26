@@ -15,6 +15,11 @@ const CategoryList = require('../Components/CategoryList');
 const Scene = require('./Scene');
 const Styles = require('../Styles');
 
+/*! Scene which displays a list of categories
+ *
+ *  propTypes:
+ *      ...Scene.propTypes
+ */
 class SceneCategoryList extends Scene {
     _onPressCategory(categoryData) {
         this.props.navigator.push({
