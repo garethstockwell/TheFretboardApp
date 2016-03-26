@@ -53,7 +53,7 @@ class Discussion extends React.Component {
         console.log('Discussion.render');
 
         return (
-            <View style={Styles.container}>
+            <View style={Styles.viewContainer}>
                 <WebView
                     style={{
                         backgroundColor: '#ffffff',

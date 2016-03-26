@@ -21,6 +21,7 @@ const SceneCategoryList = require('./Scenes/SceneCategoryList');
 const SceneCategory = require('./Scenes/SceneCategory');
 const SceneDiscussion = require('./Scenes/SceneDiscussion');
 const SceneLogin = require('./Scenes/SceneLogin');
+const SceneMenu = require('./Scenes/SceneMenu');
 const Styles = require('./Styles');
 
 // Based on
@@ -52,7 +53,18 @@ class App extends Component {
 
     _onPressMenu(navigator) {
         console.log('App.onPressMenu ' + navigator);
-        this.setState({login: true});
+        //this.setState({login: true});
+
+        navigator.push({
+            id: 'SceneMenu',
+            title: 'Menu',
+            // Should be FloatFromBottom, but this isn't implemented
+            //sceneConfig: Navigator.SceneConfigs.FadeAndroid,
+
+            passProps: {
+                logOut: this._logOut.bind(this),
+            }
+        })
     }
 
     _navigationBar() {
@@ -61,6 +73,10 @@ class App extends Component {
                 onPressMenu={this._onPressMenu.bind(this)}
             />
         )
+    }
+
+    _logOut() {
+        this.setState({ login: true });
     }
 
     _loginComplete() {
@@ -114,6 +130,16 @@ class App extends Component {
             );
         }
 
+        if (route.id === 'SceneMenu') {
+            return (
+                <SceneMenu
+                    navigator={navigator}
+                    navigationBar={this._navigationBar()}
+                    {...route.passProps}
+                />
+            );
+        }
+
         if (route.id === 'SceneCategoryList') {
             return (
                 <SceneCategoryList
@@ -149,7 +175,7 @@ class App extends Component {
 
     noRoute(navigator) {
         return (
-            <View style={Styles.container}>
+            <View style={Styles.viewContainer}>
                 <TouchableOpacity
                         onPress={() => navigator.pop()}>
                     <Text style={{color: 'red', fontWeight: 'bold'}}>renderScene</Text>

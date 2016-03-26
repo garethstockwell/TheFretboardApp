@@ -135,7 +135,7 @@ class DiscussionList extends React.Component {
 
     render() {
         return (
-            <View style={Styles.container}>
+            <View style={Styles.viewContainer}>
                 {this._renderBody()}
             </View>
         );
