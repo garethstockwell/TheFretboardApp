@@ -76,7 +76,6 @@ var FONT_SIZE = {
 };
 
 var FONT_SIZE_LEGACY = {
-        SPLASH:                    32,
         NAVBAR:                    16,
 
         LOGIN_LABEL:               18,
@@ -202,9 +201,7 @@ const styles = StyleSheet.create({
 
      viewButton: {
          flex: 1,
-         backgroundColor: COLOR.TRANSPARENT,
          marginTop: DIM.MARGIN_BUTTON,
-         marginHorizontal: DIM.MARGIN_BUTTON,
      },
 
      textButton: {

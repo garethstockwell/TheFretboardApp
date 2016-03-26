@@ -32,6 +32,11 @@ const DUMMY_HTML = `
 </html>
 `;
 
+/*! Discussion view
+ *
+ *  propTypes:
+ *      ...View.propTypes
+ */
 class Discussion extends React.Component {
     constructor(props) {
         super(props);

@@ -13,6 +13,14 @@ import React, {
 
 const Styles = require('../Styles');
 
+/*! Entry in list of dicussions
+ *
+ *  propTypes:
+ *      ...View.propTypes
+ *
+ *      discussionData: object
+ *          required: true
+ */
 class DiscussionListItem extends React.Component {
     render() {
         return (

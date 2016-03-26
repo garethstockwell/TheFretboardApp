@@ -14,6 +14,23 @@ import React, {
 
 const Styles = require('../Styles');
 
+/*! ListView which renders section headings
+ *
+ *  propTypes:
+ *      ...View.propTypes
+ *
+ *      data: object
+ *          required: true
+ *
+ *      onScroll: function()
+ *          required: false
+ *
+ *      renderRow: function(object)
+ *          required: true
+ *
+ *      renderSectionHeader: function(object)
+ *          required: true
+ */
 class ListViewSectioned extends React.Component {
     constructor(props) {
         super(props);

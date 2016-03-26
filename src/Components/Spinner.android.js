@@ -13,7 +13,12 @@ import React, {
 
 const Styles = require('../Styles');
 
-class Spinner extends Component {
+/*! Spinner
+ *
+ *  propTypes:
+ *      ...View.propTypes
+ */
+class Spinner extends React.Component {
     render() {
         return (
             <ProgressBarAndroid
