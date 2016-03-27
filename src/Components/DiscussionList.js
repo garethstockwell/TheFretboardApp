@@ -10,7 +10,6 @@ import React, {
     Text,
 } from 'react-native';
 
-import Client from '../Client/Client';
 const DiscussionListItem = require('./DiscussionListItem');
 const ListViewPaged = require('./ListViewPaged');
 const Styles = require('../Styles');
@@ -60,7 +59,7 @@ class DiscussionList extends React.Component {
 
         var itemIndex = ((pageIndex - 1) * itemsPerPage) + 1;
 
-        Client.getCategoryDiscussionList(
+        this.props.client.getCategoryDiscussionList(
             this.props.categoryData['CategoryID'],
             pageIndex,
             itemIndex,

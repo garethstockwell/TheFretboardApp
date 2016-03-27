@@ -15,7 +15,6 @@ import React, {
     View,
 } from 'react-native';
 
-import Client from '../Client/Client';
 const Button = require('../Components/Button');
 const Spinner = require('../Components/Spinner');
 const Styles = require('../Styles');
@@ -48,7 +47,7 @@ class SceneLogin extends Component {
             status: 'Logging in',
         });
 
-        Client.logIn(
+        this.props.client.logIn(
             this.state.username,
             this.state.password,
             this.onLoginComplete.bind(this));
@@ -194,7 +193,7 @@ class SceneLogin extends Component {
                 </View>
 
                 <View style={Styles.viewLoginBody}>
-                    <View style={Styles.viewContainer}>
+                    <View style={[Styles.viewContainer, Styles.viewCenter]}>
                         <View style={Styles.viewLoginStatus}>
                             <Text style={Styles.textLoginStatus}>
                                 {this.state.status}

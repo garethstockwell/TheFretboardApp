@@ -7,28 +7,17 @@
 
 'use strict';
 
+import ClientMock from './ClientMock';
 import ApiUtils from './ApiUtils';
-
-var Symbol = require('es6-symbol');
-
-let singleton = Symbol();
-let singletonEnforcer = Symbol();
-
-let instance = null;
-
-// We are using this for now because theFB hasn't activated the API
-let URL_SITE = 'http://forums.xamarin.com'
-
-let URL_API = URL_SITE + '/api/v1'
 
 /*
  * Wrapper around fetch.Response which facilitates cancellation of requests.
  */
 class ClientResponse {
     constructor(responseCallback, errorCallback) {
+        this.active = true;
         this._responseCallback = responseCallback;
         this._errorCallback = errorCallback;
-        this.active = true;
     }
 
     cancel() {
@@ -51,23 +40,15 @@ class ClientResponse {
     }
 };
 
-class ClientVanilla {
-    constructor(enforcer) {
-        if (enforcer != singletonEnforcer) {
-            throw "Cannot construct singleton";
-        }
-    }
-
-    static get instance() {
-        if (!this[singleton]) {
-            this[singleton] = new ClientVanilla(singletonEnforcer);
-        }
-        return this[singleton];
+class ClientVanilla extends ClientMock {
+    constructor(domain) {
+        super();
+        this.url = 'http://' + domain + '/api/v1';
     }
 
     _fetch(url, process, responseCallback, errorCallback) {
         var request = new Request();
-        request.url = URL_API + url;
+        request.url = this.url + url;
 
         var wrapper = new ClientResponse(responseCallback, errorCallback);
 
@@ -102,7 +83,7 @@ class ClientVanilla {
      * rowIDs is an array of arrays of category IDs.
      */
     getCategoryListSectioned(responseCallback, errorCallback) {
-        console.log('Client.getCategoryListSectioned');
+        console.log('ClientVanilla.getCategoryListSectioned');
         var process = function(response) {
             var inData = response.Categories;
 
@@ -151,7 +132,7 @@ class ClientVanilla {
      * TODO: pagination.
      */
     getDiscussionList(callback) {
-        console.log('Client.getDiscussionList');
+        console.log('ClientVanilla.getDiscussionList');
         return this._fetch('/discussions/list.json',
                 (data => this._objectValues(data.Discussions)), callback);
     }
@@ -161,7 +142,7 @@ class ClientVanilla {
      */
     getCategoryDiscussionList(categoryID, pageIndex, itemIndex,
             responseCallback, errorCallback) {
-        console.log('Client.getCategoryDiscussionList'
+        console.log('ClientVanilla.getCategoryDiscussionList'
             + ' categoryID '+ categoryID
             + ' pageIndex ' + pageIndex
             + ' itemIndex ' + itemIndex);

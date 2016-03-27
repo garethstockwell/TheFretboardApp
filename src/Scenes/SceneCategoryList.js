@@ -19,23 +19,18 @@ const Styles = require('../Styles');
  *
  *  propTypes:
  *      ...Scene.propTypes
+ *
+ *      onPressCategory: function(navigator, object)
+ *          required: true
  */
 class SceneCategoryList extends Scene {
-    _onPressCategory(categoryData) {
-        this.props.navigator.push({
-            id: 'SceneCategory',
-            title: categoryData['Name'],
-            passProps: {
-                categoryData: categoryData,
-            },
-        });
-    }
-
     renderBody() {
         return (
             <CategoryList
+                client={this.props.client}
                 onPress={(categoryData) =>
-                        this._onPressCategory(categoryData)}
+                    this.props.onPressCategory(
+                        this.props.navigator, categoryData)}
                 onScroll={() => this._onScroll()}
                 onLoadingChanged={(value) => this._onLoadingChanged(value)}
             />
