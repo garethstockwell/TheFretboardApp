@@ -30,7 +30,7 @@ class SceneDiscussion extends Scene {
             <Discussion
                 client={this.props.client}
                 discussionData={this.props.discussionData}
-                onLoadingChanged={(value) => this._onLoadingChanged(value)}
+                onLoadingChanged={(value) => this.onLoadingChanged(value)}
             />
         );
     }

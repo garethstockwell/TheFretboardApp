@@ -35,12 +35,12 @@ class Scene extends React.Component {
         }
     }
 
-    _onLoadingChanged(value) {
-        console.log(this.constructor.name + '._onLoadingChanged ' + value);
+    onLoadingChanged(value) {
+        console.log(this.constructor.name + '.onLoadingChanged ' + value);
         this.setState({ loading: value });
     }
 
-    _onScroll() {
+    onScroll() {
         this.setState({ hideNavBar: true });
     }
 
@@ -55,7 +55,7 @@ class Scene extends React.Component {
         );
     }
 
-    _renderLoading() {
+    renderLoading() {
         if (this.state.loading) {
             return (
                 <View style={Styles.spinnerView}>
@@ -75,7 +75,7 @@ class Scene extends React.Component {
         return (
             <View style={Styles.viewSceneBody}>
                 {this.renderBody()}
-                {this._renderLoading()}
+                {this.renderLoading()}
             </View>
         );
     }

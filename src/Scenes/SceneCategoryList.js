@@ -31,8 +31,8 @@ class SceneCategoryList extends Scene {
                 onPress={(categoryData) =>
                     this.props.onPressCategory(
                         this.props.navigator, categoryData)}
-                onScroll={() => this._onScroll()}
-                onLoadingChanged={(value) => this._onLoadingChanged(value)}
+                onScroll={() => this.onScroll()}
+                onLoadingChanged={(value) => this.onLoadingChanged(value)}
             />
         );
     }

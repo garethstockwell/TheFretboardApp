@@ -108,9 +108,9 @@ class DiscussionList extends React.Component {
         );
     }
 
-    _renderBody() {
+    renderBody() {
         if (this.state.error) {
-            console.log('DiscussionList._renderBody error');
+            console.log('DiscussionList.renderBody error');
             return (
                 <Text>ERROR</Text>
             );
@@ -135,7 +135,7 @@ class DiscussionList extends React.Component {
     render() {
         return (
             <View style={Styles.viewContainer}>
-                {this._renderBody()}
+                {this.renderBody()}
             </View>
         );
     }
