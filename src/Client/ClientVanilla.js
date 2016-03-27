@@ -7,38 +7,8 @@
 
 'use strict';
 
+import Client from './Client';
 import ClientMock from './ClientMock';
-import ApiUtils from './ApiUtils';
-
-/*
- * Wrapper around fetch.Response which facilitates cancellation of requests.
- */
-class ClientResponse {
-    constructor(responseCallback, errorCallback) {
-        this.active = true;
-        this._responseCallback = responseCallback;
-        this._errorCallback = errorCallback;
-    }
-
-    cancel() {
-        console.log('ClientResponse.cancel');
-        this.active = false;
-    }
-
-    responseCallback(data) {
-        if (this.active) {
-            this.active = false;
-            this._responseCallback(data);
-        }
-    }
-
-    errorCallback(data) {
-        if (this.active) {
-            this.active = false;
-            this._errorCallback(data);
-        }
-    }
-};
 
 class ClientVanilla extends ClientMock {
     constructor(domain) {
@@ -50,10 +20,10 @@ class ClientVanilla extends ClientMock {
         var request = new Request();
         request.url = this.url + url;
 
-        var wrapper = new ClientResponse(responseCallback, errorCallback);
+        var wrapper = new Client.Response(responseCallback, errorCallback);
 
         fetch(request)
-            .then(ApiUtils.checkStatus)
+            .then(Client.checkStatus)
             .then(resp => resp.json())
             .then(resp => process(resp))
             .then(resp => wrapper.responseCallback(resp))
