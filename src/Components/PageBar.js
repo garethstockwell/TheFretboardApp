@@ -30,21 +30,21 @@ const Styles = require('../Styles');
  *          required: true
  */
 class PageBar extends React.Component {
-    _goToPrev() {
-        console.log('PageBar._goToPrev');
+    goToPrev() {
+        console.log('PageBar.goToPrev');
         this.props.goToPage(this.props.currentPage - 1);
     }
 
-    _goToNext() {
-        console.log('PageBar._goToNext');
+    goToNext() {
+        console.log('PageBar.goToNext');
         this.props.goToPage(this.props.currentPage + 1);
     }
 
-    _renderPrev() {
+    renderPrev() {
         if (this.props.currentPage > 1) {
             return (
                 <View style={Styles.pageBarLeft}>
-                    <TouchableHighlight onPress={() => this._goToPrev()}>
+                    <TouchableHighlight onPress={() => this.goToPrev()}>
                         <Text style={Styles.liPageBarText}>
                             &lt;
                         </Text>
@@ -54,7 +54,7 @@ class PageBar extends React.Component {
         }
     }
 
-    _renderStatus() {
+    renderStatus() {
         return (
             <View style={Styles.pageBarCenter}>
                 <Text style={Styles.liPageBarText}>
@@ -64,11 +64,11 @@ class PageBar extends React.Component {
         );
     }
 
-    _renderNext() {
+    renderNext() {
         if (this.props.currentPage < this.props.numPages) {
             return (
                 <View style={Styles.pageBarRight}>
-                    <TouchableHighlight onPress={() => this._goToNext()}>
+                    <TouchableHighlight onPress={() => this.goToNext()}>
                         <Text style={Styles.liPageBarText}>
                             &gt;
                         </Text>
@@ -81,9 +81,9 @@ class PageBar extends React.Component {
     render() {
         return (
             <View style={Styles.liPageBar}>
-                {this._renderPrev()}
-                {this._renderStatus()}
-                {this._renderNext()}
+                {this.renderPrev()}
+                {this.renderStatus()}
+                {this.renderNext()}
             </View>
         );
     }

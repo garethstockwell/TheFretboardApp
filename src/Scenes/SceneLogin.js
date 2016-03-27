@@ -59,22 +59,13 @@ class SceneLogin extends Component {
         this.setState({ spinner: false });
 
         if (result) {
-            console.log('XXX ' + this.state.username);
             this.props.onLoginComplete(this.state.username);
         } else {
             this.setState({ status: 'Log in failed' });
         }
     }
 
-    _renderStatus() {
-        <View style={Styles.viewLoginStatus}>
-            <Text style={Styles.textLoginStatus}>
-                {this.state.status}
-            </Text>
-        </View>
-    }
-
-    _renderForm() {
+    renderForm() {
         if (this.state.spinner) {
             return (
                 <View style={Styles.viewLoginForm}>
@@ -163,7 +154,7 @@ class SceneLogin extends Component {
         }
     }
 
-    _renderToolbar() {
+    renderToolbar() {
         return (
             <View style={Styles.viewToolbar}>
                 <Button
@@ -200,12 +191,12 @@ class SceneLogin extends Component {
                             </Text>
                         </View>
 
-                        {this._renderForm()}
+                        {this.renderForm()}
 
                         <View style={Styles.viewLoginStatus} />
                     </View>
 
-                    {this._renderToolbar()}
+                    {this.renderToolbar()}
                 </View>
             </View>
         );

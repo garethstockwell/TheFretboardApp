@@ -91,9 +91,9 @@ class CategoryList extends React.Component {
         );
     }
 
-    _renderBody() {
+    renderBody() {
         if (this.state.error) {
-            console.log('CategoryList._renderBody error');
+            console.log('CategoryList.renderBody error');
             return (
                 <Text>ERROR</Text>
             );
@@ -113,7 +113,7 @@ class CategoryList extends React.Component {
     render() {
         return (
             <View style={Styles.viewContainer}>
-                {this._renderBody()}
+                {this.renderBody()}
             </View>
         );
     }

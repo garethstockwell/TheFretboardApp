@@ -27,16 +27,16 @@ const Styles = require('./Styles');
 
 // Based on
 // http://blog.paracode.com/2016/01/05/routing-and-navigation-in-react-native/
-var _navigator;
+var navigator;
 function androidAddBackButtonListener(navigator) {
-    if (!_navigator) {
-        _navigator = navigator;
+    if (!navigator) {
+        navigator = navigator;
 
         BackAndroid.addEventListener('hardwareBackPress', () => {
-            if (_navigator.getCurrentRoutes().length === 1) {
+            if (navigator.getCurrentRoutes().length === 1) {
                 return false;
             }
-            _navigator.pop();
+            navigator.pop();
             return true;
         });
     }
@@ -54,7 +54,7 @@ class App extends Component {
         };
     }
 
-    _client() {
+    client() {
         if (this.state.serverDomain == '') {
             return new ClientMock();
         } else {
@@ -62,22 +62,22 @@ class App extends Component {
         }
     }
 
-    _navigationBar() {
+    navigationBar() {
         return (
             <NavigationBar
-                onPressMenu={this._navMenu.bind(this)}
+                onPressMenu={this.navMenu.bind(this)}
             />
         )
     }
 
-    _logOut() {
+    logOut() {
         this.setState({
             username: null,
             login: true
         });
     }
 
-    _loginComplete(username) {
+    loginComplete(username) {
         console.log('App.loginComplete username ' + username)
         this.setState({
             username: username,
@@ -85,16 +85,16 @@ class App extends Component {
         });
     }
 
-    _renderLogin() {
+    renderLogin() {
         return (
             <SceneLogin
-                client={this._client()}
-                onLoginComplete={this._loginComplete.bind(this)}
+                client={this.client()}
+                onLoginComplete={this.loginComplete.bind(this)}
             />
         );
     }
 
-    _renderNavigator() {
+    renderNavigator() {
         return (
             <Navigator
                 configureScene={(route) => {
@@ -107,7 +107,7 @@ class App extends Component {
                     id: 'SceneCategoryList',
                     title: 'Categories',
                 }}
-                navigationBar={this._navigationBar()}
+                navigationBar={this.navigationBar()}
                 renderScene={this.renderScene.bind(this)}
             />
         );
@@ -115,9 +115,9 @@ class App extends Component {
 
     render() {
         if (this.state.login) {
-            return this._renderLogin();
+            return this.renderLogin();
         } else {
-            return this._renderNavigator();
+            return this.renderNavigator();
         }
     }
 
@@ -128,7 +128,7 @@ class App extends Component {
             return (
                 <SceneLogin
                     navigator={navigator}
-                    client={this._client()}
+                    client={this.client()}
                     {...route.passProps}
                 />
             );
@@ -138,13 +138,13 @@ class App extends Component {
             return (
                 <SceneMenu
                     navigator={navigator}
-                    navigationBar={this._navigationBar()}
-                    client={this._client()}
+                    navigationBar={this.navigationBar()}
+                    client={this.client()}
                     username={this.state.username}
-                    onPressLogOut={this._logOut.bind(this)}
-                    onPressCategoryList={this._navCategoryList}
+                    onPressLogOut={this.logOut.bind(this)}
+                    onPressCategoryList={this.navCategoryList}
                     serverDomain={this.state.serverDomain}
-                    onServerDomainChange={this._setServerDomain.bind(this)}
+                    onServerDomainChange={this.setServerDomain.bind(this)}
                     {...route.passProps}
                 />
             );
@@ -154,9 +154,9 @@ class App extends Component {
             return (
                 <SceneCategoryList
                     navigator={navigator}
-                    navigationBar={this._navigationBar()}
-                    client={this._client()}
-                    onPressCategory={this._navCategory}
+                    navigationBar={this.navigationBar()}
+                    client={this.client()}
+                    onPressCategory={this.navCategory}
                     {...route.passProps}
                 />
             );
@@ -166,9 +166,9 @@ class App extends Component {
             return (
                 <SceneCategory
                     navigator={navigator}
-                    navigationBar={this._navigationBar()}
-                    client={this._client()}
-                    onPressDiscussion={this._navDiscussion}
+                    navigationBar={this.navigationBar()}
+                    client={this.client()}
+                    onPressDiscussion={this.navDiscussion}
                     {...route.passProps}
                 />
             );
@@ -178,8 +178,8 @@ class App extends Component {
             return (
                 <SceneDiscussion
                     navigator={navigator}
-                    navigationBar={this._navigationBar()}
-                    client={this._client()}
+                    navigationBar={this.navigationBar()}
+                    client={this.client()}
                     {...route.passProps}
                 />
             );
@@ -201,9 +201,9 @@ class App extends Component {
 
     // DEV methods
 
-    _setServerDomain(serverDomain) {
+    setServerDomain(serverDomain) {
         if (this.state.serverDomain != serverDomain) {
-            console.log('App._setServerDomain ' + serverDomain);
+            console.log('App.setServerDomain ' + serverDomain);
 
             this.setState({
                 serverDomain: serverDomain,
@@ -215,8 +215,8 @@ class App extends Component {
 
     // Navigation methods
 
-    _navMenu(navigator) {
-        console.log('App._navMenu ' + navigator);
+    navMenu(navigator) {
+        console.log('App.navMenu ' + navigator);
 
         navigator.push({
             id: 'SceneMenu',
@@ -227,8 +227,8 @@ class App extends Component {
         })
     }
 
-    _navCategoryList(navigator) {
-        console.log('App._navCategoryList');
+    navCategoryList(navigator) {
+        console.log('App.navCategoryList');
 
         navigator.resetTo({
             id: 'SceneCategoryList',
@@ -236,8 +236,8 @@ class App extends Component {
         });
     }
 
-    _navCategory(navigator, categoryData) {
-        console.log('App._navCategory ' + categoryData['Name']);
+    navCategory(navigator, categoryData) {
+        console.log('App.navCategory ' + categoryData['Name']);
 
         navigator.push({
             id: 'SceneCategory',
@@ -248,8 +248,8 @@ class App extends Component {
         });
     }
 
-    _navDiscussion(navigator, discussionData) {
-        console.log('App._navDiscussion ' + discussionData['Name'])
+    navDiscussion(navigator, discussionData) {
+        console.log('App.navDiscussion ' + discussionData['Name'])
 
         navigator.push({
             id: 'SceneDiscussion',
