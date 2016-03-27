@@ -7,9 +7,7 @@
 
 'use strict';
 
-import React, {
-    View,
-} from 'react-native';
+import React from 'react-native';
 
 const Discussion = require('../Components/Discussion');
 const Scene = require('./Scene');
