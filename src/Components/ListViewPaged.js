@@ -90,6 +90,10 @@ class ListViewPaged extends React.Component {
             pageBarArray.push(pageBarItem);
         }
 
+        if (this.listView) {
+            this.listView.scrollTo({y: 0});
+        }
+
         this.setState({
             dataSource: this.state.dataSource.cloneWithRows(
                 pageBarArray.concat(data).concat(pageBarArray))
@@ -113,6 +117,7 @@ class ListViewPaged extends React.Component {
     render() {
         return (
             <ListView
+                ref={(component) => this.listView = component}
                 dataSource={this.state.dataSource}
                 renderRow={this.renderRow.bind(this)}
                 style={Styles.listview}
