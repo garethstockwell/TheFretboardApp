@@ -13,8 +13,8 @@ import React, {
     View,
 } from 'react-native';
 
-import ClientMock from './Client/ClientMock';
-import ClientVanilla from './Client/ClientVanilla';
+import ClientMock from './Lib/ClientMock';
+import ClientVanilla from './Lib/ClientVanilla';
 
 const NavigationBar = require('./Components/NavigationBar');
 //const NavigationBar = require('./Components/NavigationBarBreadcrumb');
