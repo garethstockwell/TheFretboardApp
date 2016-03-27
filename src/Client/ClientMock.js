@@ -7,9 +7,28 @@
 
 'use strict';
 
+var Client = require('./Client');
+
 const RESPONSE_DELAY = 1000;
 
 class ClientMock {
+    _request(result, responseCallback, error, errorCallback) {
+        var wrapper = new Client.Response(responseCallback, errorCallback);
+
+        setTimeout(
+            () => {
+                if (error) {
+                    wrapper.errorCallback(error);
+                } else {
+                    wrapper.responseCallback(result);
+                }
+            },
+            RESPONSE_DELAY
+        );
+
+        return wrapper;
+    }
+
     /* Log in
      *
      */
@@ -18,25 +37,9 @@ class ClientMock {
             + ' username ' + username
             + ' password ' + password);
 
-        setTimeout(
-            () => {
-                var result = (username == 'test' && password == 'abc');
-                callback(result);
-            },
-            RESPONSE_DELAY
-        );
-    }
+        var result = (username == 'test' && password == 'abc');
 
-    /* Log out.
-     *
-     */
-    logOut(callback) {
-        console.log('ClientMock.logOut');
-
-        setTimeout(
-            () => { callback(); },
-            RESPONSE_DELAY
-        );
+        return this._request(result, callback, null, null);
     }
 
     /* Return list of all categories.
@@ -53,36 +56,33 @@ class ClientMock {
     getCategoryListSectioned(responseCallback, errorCallback) {
         console.log('ClientMock.getCategoryListSectioned');
 
-        setTimeout(
-            () => {
-                responseCallback({
-                    dataBlob: {
-                        "1": {
-                            CategoryID: 1,
-                            Name: 'Test category 1',
-                            CountAllDiscussions: 200,
-                        },
-                        "2": {
-                            CategoryID: 2,
-                            Name: 'Test category 2',
-                            CountAllDiscussions: 200,
-                        },
-                        "3": {
-                            CategoryID: 3,
-                            Name: 'Test category 3',
-                            CountAllDiscussions: 200,
-                        },
-                    },
-                    sectionIDs: [
-                        '1'
-                    ],
-                    rowIDs: [
-                        [ '2', '3' ]
-                    ],
-                });
+        var result = {
+            dataBlob: {
+                "1": {
+                    CategoryID: 1,
+                    Name: 'Test category 1',
+                    CountAllDiscussions: 200,
+                },
+                "2": {
+                    CategoryID: 2,
+                    Name: 'Test category 2',
+                    CountAllDiscussions: 200,
+                },
+                "3": {
+                    CategoryID: 3,
+                    Name: 'Test category 3',
+                    CountAllDiscussions: 200,
+                },
             },
-            RESPONSE_DELAY
-        );
+            sectionIDs: [
+                '1'
+            ],
+            rowIDs: [
+                [ '2', '3' ]
+            ],
+        };
+
+        return this._request(result, responseCallback, null, null);
     }
 
     /* Returns a list of all discussions.
@@ -117,15 +117,12 @@ class ClientMock {
             );
         }
 
-        setTimeout(
-            () => {
-                responseCallback({
-                    pageIndex: pageIndex,
-                    discussions: discussions
-                });
-            },
-            RESPONSE_DELAY
-        );
+        var result = {
+            pageIndex: pageIndex,
+            discussions: discussions
+        };
+
+        return this._request(result, responseCallback, null, null);
     }
 };
 

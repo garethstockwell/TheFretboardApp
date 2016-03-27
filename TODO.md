@@ -4,9 +4,6 @@ This file captures miscellaneous TODO items which are not recorded in the REQUIR
 
 ## Definitely
 
-* ClientResponse
-   * Move to ApiUtils module
-   * Use in ClientMock
 * "Dev build" Flag
    * Show a message on the login screen
    * Use dev server URL
