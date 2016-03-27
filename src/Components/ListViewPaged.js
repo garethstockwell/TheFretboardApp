@@ -84,13 +84,15 @@ class ListViewPaged extends React.Component {
 
         var pageBarItem = this.pageBarItem();
 
+        var pageBarArray = [];
+
         if (pageBarItem.numPages > 1) {
-            data.splice(0, 0, pageBarItem);
-            data.push(pageBarItem);
+            pageBarArray.push(pageBarItem);
         }
 
         this.setState({
-            dataSource: this.state.dataSource.cloneWithRows(data)
+            dataSource: this.state.dataSource.cloneWithRows(
+                pageBarArray.concat(data).concat(pageBarArray))
         });
     }
 
