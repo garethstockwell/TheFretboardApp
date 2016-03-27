@@ -7,6 +7,7 @@
 'use strict';
 
 import React, {
+    Picker,
     ScrollView,
     Text,
     View,
@@ -37,6 +38,22 @@ class SceneMenu extends Scene {
 
     _todo() {
         console.log('TODO: connect up this button');
+    }
+
+    _renderHeading(text) {
+        return (
+            <View style={Styles.viewDialogHeading}>
+                <Text style={Styles.textDialogHeading}>
+                    {text}
+                </Text>
+            </View>
+        );
+    }
+
+    _renderSpacer() {
+        return (
+            <View style={Styles.viewDialogSectionSpacer} />
+        );
     }
 
     _renderAccountGuest() {
@@ -83,14 +100,6 @@ class SceneMenu extends Scene {
         );
     }
 
-    _renderAccount() {
-        if (this.props.appState.username) {
-            return this._renderAccountUser();
-        } else {
-            return this._renderAccountGuest();
-        }
-    }
-
     _renderNavigation() {
         const rows = [
             ['Search', this._todo],
@@ -103,25 +112,44 @@ class SceneMenu extends Scene {
         return rows.map(this._createRow);
     }
 
+    _renderAccount() {
+        if (this.props.appState.username) {
+            return this._renderAccountUser();
+        } else {
+            return this._renderAccountGuest();
+        }
+    }
+
+    _renderDevelopment() {
+        return (
+            <View style={Styles.viewDialogRow}>
+                <Picker
+                    style={Styles.pickerDialog}
+                    selectedValue='Mock'
+                >
+                    <Picker.Item label="Mock" value="" />
+                    <Picker.Item label="thefretboard.co.uk" value="thefretboard.co.uk" />
+                </Picker>
+            </View>
+        )
+    }
+
     renderBody() {
         return (
             <ScrollView style={Styles.scrollViewDialog}>
                 <View style={Styles.viewMargin}>
-                    <View style={Styles.viewDialogHeading}>
-                        <Text style={Styles.textDialogHeading}>
-                            Navigation
-                        </Text>
-                    </View>
+                    {this._renderHeading('Navigation')}
                     {this._renderNavigation()}
 
-                    <View style={Styles.viewDialogSectionSpacer} />
+                    {this._renderSpacer()}
 
-                    <View style={Styles.viewDialogHeading}>
-                        <Text style={Styles.textDialogHeading}>
-                            Account
-                        </Text>
-                    </View>
+                    {this._renderHeading('Account')}
                     {this._renderAccount()}
+
+                    {this._renderSpacer()}
+
+                    {this._renderHeading('Development')}
+                    {this._renderDevelopment()}
                 </View>
             </ScrollView>
         );

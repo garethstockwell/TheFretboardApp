@@ -344,6 +344,11 @@ const styles = StyleSheet.create({
         height: DIM.SEP_DIALOG_SECTION,
     },
 
+    pickerDialog: {
+        flex: 1,
+        color: COLOR.WHITE,
+    },
+
     /*
      * Legacy
      */
