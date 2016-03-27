@@ -7,34 +7,14 @@
 
 'use strict';
 
-var Symbol = require('es6-symbol');
-
-let singleton = Symbol();
-let singletonEnforcer = Symbol();
-
-let instance = null;
-
 const RESPONSE_DELAY = 1000;
 
 class ClientMock {
-    constructor(enforcer) {
-        if (enforcer != singletonEnforcer) {
-            throw "Cannot construct singleton";
-        }
-    }
-
-    static get instance() {
-        if (!this[singleton]) {
-            this[singleton] = new ClientMock(singletonEnforcer);
-        }
-        return this[singleton];
-    }
-
     /* Log in
      *
      */
     logIn(username, password, callback) {
-        console.log('Client.logIn'
+        console.log('ClientMock.logIn'
             + ' username ' + username
             + ' password ' + password);
 
@@ -51,7 +31,7 @@ class ClientMock {
      *
      */
     logOut(callback) {
-        console.log('Client.logOut');
+        console.log('ClientMock.logOut');
 
         setTimeout(
             () => { callback(); },
@@ -71,7 +51,7 @@ class ClientMock {
      * rowIDs is an array of arrays of category IDs.
      */
     getCategoryListSectioned(responseCallback, errorCallback) {
-        console.log('Client.getCategoryListSectioned');
+        console.log('ClientMock.getCategoryListSectioned');
 
         setTimeout(
             () => {
@@ -110,7 +90,7 @@ class ClientMock {
      * TODO: pagination.
      */
     getDiscussionList(callback) {
-        console.log('Client.getDiscussionList');
+        console.log('ClientMock.getDiscussionList');
 
     }
 
@@ -119,7 +99,7 @@ class ClientMock {
      */
     getCategoryDiscussionList(categoryID, pageIndex, itemIndex,
             responseCallback, errorCallback) {
-        console.log('Client.getCategoryDiscussionList'
+        console.log('ClientMock.getCategoryDiscussionList'
             + ' categoryID '+ categoryID
             + ' pageIndex ' + pageIndex
             + ' itemIndex ' + itemIndex);

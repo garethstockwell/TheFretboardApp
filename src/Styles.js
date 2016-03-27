@@ -121,13 +121,15 @@ const styles = StyleSheet.create({
 
     viewContainer: {
         flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
     },
 
     viewMargin: {
-        flex: 1,
         margin: DIM.MARGIN_VIEW,
+    },
+
+    viewCenter: {
+        alignItems: 'center',
+        justifyContent: 'center',
     },
 
     /*
@@ -329,6 +331,7 @@ const styles = StyleSheet.create({
         marginLeft: DIM.INDENT,
         marginTop: DIM.SEP_DIALOG_ITEM,
         flexDirection: 'row',
+        justifyContent: 'center',
     },
 
     textDialogItem: {
@@ -347,6 +350,25 @@ const styles = StyleSheet.create({
     pickerDialog: {
         flex: 1,
         color: COLOR.WHITE,
+    },
+
+    viewDialogLabel: {
+        justifyContent: 'center',
+        marginRight: DIM.SEP_DIALOG_ITEM,
+    },
+
+    viewDialogField: {
+        flex: 1,
+        justifyContent: 'center',
+    },
+
+    viewButtonDialog: {
+        flex: 1,
+    },
+
+    textButtonDialog: {
+        flex: 1,
+        textAlign: 'left',
     },
 
     /*

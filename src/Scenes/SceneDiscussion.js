@@ -28,6 +28,7 @@ class SceneDiscussion extends Scene {
         console.log('SceneDiscussion.renderBody ' + this.props.discussionData);
         return (
             <Discussion
+                client={this.props.client}
                 discussionData={this.props.discussionData}
                 onLoadingChanged={(value) => this._onLoadingChanged(value)}
             />

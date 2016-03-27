@@ -10,7 +10,6 @@ import React, {
     Text,
 } from 'react-native';
 
-import Client from '../Client/Client';
 const CategoryListItem = require('./CategoryListItem');
 const ListViewSectioned = require('./ListViewSectioned');
 const Styles = require('../Styles');
@@ -45,7 +44,7 @@ class CategoryList extends React.Component {
 
         this.props.onLoadingChanged(true);
 
-        Client.getCategoryListSectioned(
+        this.props.client.getCategoryListSectioned(
             this.onGetCategoryListResponse.bind(this),
             this.onClientError.bind(this)
         );

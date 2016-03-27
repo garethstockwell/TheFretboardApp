@@ -13,7 +13,8 @@ import React, {
     View,
 } from 'react-native';
 
-import Client from './Client/Client';
+import ClientMock from './Client/ClientMock';
+import ClientVanilla from './Client/ClientVanilla';
 
 const NavigationBar = require('./Components/NavigationBar');
 //const NavigationBar = require('./Components/NavigationBarBreadcrumb');
@@ -47,38 +48,24 @@ class App extends Component {
         super(props);
 
         this.state = {
+            serverDomain: '',
             login: true,
             username: null,
         };
     }
 
-    // State which is exported to other components
-    _state() {
-        return {
-            username: this.state.username,
-        };
-    }
-
-    _onPressMenu(navigator) {
-        console.log('App.onPressMenu ' + navigator);
-
-        navigator.push({
-            id: 'SceneMenu',
-            title: 'Menu',
-
-            // Should be FloatFromBottom, but this isn't implemented
-            //sceneConfig: Navigator.SceneConfigs.FadeAndroid,
-
-            passProps: {
-                logOut: this._logOut.bind(this),
-            }
-        })
+    _client() {
+        if (this.state.serverDomain == '') {
+            return new ClientMock();
+        } else {
+            return new ClientVanilla(this.state.serverDomain);
+        }
     }
 
     _navigationBar() {
         return (
             <NavigationBar
-                onPressMenu={this._onPressMenu.bind(this)}
+                onPressMenu={this._navMenu.bind(this)}
             />
         )
     }
@@ -101,6 +88,7 @@ class App extends Component {
     _renderLogin() {
         return (
             <SceneLogin
+                client={this._client()}
                 onLoginComplete={this._loginComplete.bind(this)}
             />
         );
@@ -140,6 +128,7 @@ class App extends Component {
             return (
                 <SceneLogin
                     navigator={navigator}
+                    client={this._client()}
                     {...route.passProps}
                 />
             );
@@ -150,7 +139,12 @@ class App extends Component {
                 <SceneMenu
                     navigator={navigator}
                     navigationBar={this._navigationBar()}
-                    appState={this._state()}
+                    client={this._client()}
+                    username={this.state.username}
+                    onPressLogOut={this._logOut.bind(this)}
+                    onPressCategoryList={this._navCategoryList}
+                    serverDomain={this.state.serverDomain}
+                    onServerDomainChange={this._setServerDomain.bind(this)}
                     {...route.passProps}
                 />
             );
@@ -161,6 +155,8 @@ class App extends Component {
                 <SceneCategoryList
                     navigator={navigator}
                     navigationBar={this._navigationBar()}
+                    client={this._client()}
+                    onPressCategory={this._navCategory}
                     {...route.passProps}
                 />
             );
@@ -171,6 +167,8 @@ class App extends Component {
                 <SceneCategory
                     navigator={navigator}
                     navigationBar={this._navigationBar()}
+                    client={this._client()}
+                    onPressDiscussion={this._navDiscussion}
                     {...route.passProps}
                 />
             );
@@ -181,6 +179,7 @@ class App extends Component {
                 <SceneDiscussion
                     navigator={navigator}
                     navigationBar={this._navigationBar()}
+                    client={this._client()}
                     {...route.passProps}
                 />
             );
@@ -198,6 +197,67 @@ class App extends Component {
                 </TouchableOpacity>
             </View>
         );
+    }
+
+    // DEV methods
+
+    _setServerDomain(serverDomain) {
+        if (this.state.serverDomain != serverDomain) {
+            console.log('App._setServerDomain ' + serverDomain);
+
+            this.setState({
+                serverDomain: serverDomain,
+                login: true,
+                username: null,
+            });
+        }
+    }
+
+    // Navigation methods
+
+    _navMenu(navigator) {
+        console.log('App._navMenu ' + navigator);
+
+        navigator.push({
+            id: 'SceneMenu',
+            title: 'Menu',
+
+            // Should be FloatFromBottom, but this isn't implemented
+            //sceneConfig: Navigator.SceneConfigs.FadeAndroid,
+        })
+    }
+
+    _navCategoryList(navigator) {
+        console.log('App._navCategoryList');
+
+        navigator.resetTo({
+            id: 'SceneCategoryList',
+            title: 'Categories',
+        });
+    }
+
+    _navCategory(navigator, categoryData) {
+        console.log('App._navCategory ' + categoryData['Name']);
+
+        navigator.push({
+            id: 'SceneCategory',
+            title: categoryData['Name'],
+            passProps: {
+                categoryData: categoryData,
+            },
+        });
+    }
+
+    _navDiscussion(navigator, discussionData) {
+        console.log('App._navDiscussion ' + discussionData['Name'])
+
+        navigator.push({
+            id: 'SceneDiscussion',
+            title: 'Discussion',
+            passProps: {
+                discussionData: discussionData,
+            },
+        })
     }
 }
 

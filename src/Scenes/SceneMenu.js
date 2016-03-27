@@ -29,6 +29,8 @@ class SceneMenu extends Scene {
                 key={data[0]}
                 style={Styles.viewDialogRow}>
                 <Button
+                    style={Styles.viewButtonDialog}
+                    textStyle={Styles.textButtonDialog}
                     text={data[0]}
                     onPress={data[1]}
                 />
@@ -57,28 +59,29 @@ class SceneMenu extends Scene {
     }
 
     _renderAccountGuest() {
+        const rows = [
+            ['Log in', this.props.onPressLogOut],
+        ];
+
         // TODO: maintain route stack when logging in
         return (
             <View style={Styles.viewContainer}>
                 <View style={Styles.viewDialogRow}>
-                    <Text style={Styles.textDialogItem}>
-                        Not logged in
-                    </Text>
+                    <View style={Styles.viewContainer}>
+                        <Text style={Styles.textDialogItem}>
+                            Not loggsed in
+                        </Text>
+                    </View>
                 </View>
 
-                <View style={Styles.viewDialogRow}>
-                    <Button
-                        text={'Log in'}
-                        onPress={this.props.logOut}
-                    />
-                </View>
+                {rows.map(this._createRow)}
             </View>
         );
     }
 
     _renderAccountUser() {
         const rows = [
-            ['Log out', this.props.logOut],
+            ['Log out', this.props.onPressLogOut],
             ['Bookmarks', this._todo],
             ['Notifications', this._todo],
             ['Messages', this._todo],
@@ -91,7 +94,7 @@ class SceneMenu extends Scene {
             <View style={Styles.viewContainer}>
                 <View style={Styles.viewDialogRow}>
                     <Text style={Styles.textDialogItem}>
-                        Logged in as {this.props.appState.username}
+                        Logged in as {this.props.username}
                     </Text>
                 </View>
 
@@ -100,10 +103,14 @@ class SceneMenu extends Scene {
         );
     }
 
+    _onPressCategoryList() {
+        this.props.onPressCategoryList(this.props.navigator);
+    }
+
     _renderNavigation() {
         const rows = [
             ['Search', this._todo],
-            ['Categories', this._todo],
+            ['Categories', this._onPressCategoryList.bind(this)],
             ['Recent discussions', this._todo],
             ['Activity', this._todo],
             ["Who's online", this._todo],
@@ -113,7 +120,7 @@ class SceneMenu extends Scene {
     }
 
     _renderAccount() {
-        if (this.props.appState.username) {
+        if (this.props.username) {
             return this._renderAccountUser();
         } else {
             return this._renderAccountGuest();
@@ -123,13 +130,23 @@ class SceneMenu extends Scene {
     _renderDevelopment() {
         return (
             <View style={Styles.viewDialogRow}>
-                <Picker
-                    style={Styles.pickerDialog}
-                    selectedValue='Mock'
-                >
-                    <Picker.Item label="Mock" value="" />
-                    <Picker.Item label="thefretboard.co.uk" value="thefretboard.co.uk" />
-                </Picker>
+                <View style={Styles.viewDialogLabel}>
+                    <Text style={Styles.textDialogItem}>
+                        Server
+                    </Text>
+                </View>
+
+                <View style={Styles.viewDialogField}>
+                    <Picker
+                        style={Styles.pickerDialog}
+                        selectedValue={this.props.serverDomain}
+                        onValueChange={this.props.onServerDomainChange}
+                    >
+                        <Picker.Item label='Mock' value='' />
+                        <Picker.Item label='forums.xamarin.com' value='forums.xamarin.com' />
+                        <Picker.Item label='fretboard.nick-long.com' value='fretboard.nick-long.com' />
+                    </Picker>
+                </View>
             </View>
         )
     }
@@ -137,7 +154,7 @@ class SceneMenu extends Scene {
     renderBody() {
         return (
             <ScrollView style={Styles.scrollViewDialog}>
-                <View style={Styles.viewMargin}>
+                <View style={[Styles.viewContainer, Styles.viewMargin]}>
                     {this._renderHeading('Navigation')}
                     {this._renderNavigation()}
 
