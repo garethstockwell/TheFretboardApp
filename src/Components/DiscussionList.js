@@ -37,6 +37,7 @@ class DiscussionList extends React.Component {
         this.state = {
             error: false,
             data: null,
+            itemsPerPage: 0,
         };
     }
 
@@ -44,20 +45,20 @@ class DiscussionList extends React.Component {
         var currentPage = this.props.currentPage || 1;
         console.log('DiscussionList.componentWillMount currentPage '
             + currentPage);
-        this.load(currentPage, 0);
+        this.load(currentPage);
     }
 
     goToPage(pageIndex) {
         console.log('DiscussionList.goToPage ' + pageIndex);
-        this.load(pageIndex, this.state.itemsPerPage);
+        this.load(pageIndex);
     }
 
-    load(pageIndex, itemsPerPage) {
+    load(pageIndex) {
         console.log('DiscussionList.load ' + pageIndex);
 
         this.props.onLoadingChanged(true);
 
-        var itemIndex = ((pageIndex - 1) * itemsPerPage) + 1;
+        var itemIndex = ((pageIndex - 1) * this.state.itemsPerPage) + 1;
 
         this.props.client.getCategoryDiscussionList(
             this.props.categoryData['CategoryID'],
