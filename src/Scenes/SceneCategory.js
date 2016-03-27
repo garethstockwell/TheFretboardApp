@@ -21,24 +21,19 @@ const Styles = require('../Styles')
  *
  *      categoryData: object
  *          required: true
+ *
+ *      onPressDiscussion: function(navigator, object)
+ *          required: true
  */
 class SceneCategory extends Scene {
-    _onPressDiscussion(discussionData) {
-        this.props.navigator.push({
-            id: 'SceneDiscussion',
-            title: 'Discussion',
-            passProps: {
-                discussionData: discussionData,
-            },
-        })
-    }
-
     renderBody() {
         return (
             <DiscussionList
+                client={this.props.client}
                 categoryData={this.props.categoryData}
                 onPress={(discussionData) =>
-                        this._onPressDiscussion(discussionData)}
+                        this.props.onPressDiscussion(
+                            this.props.navigator, discussionData)}
                 onScroll={() => this._onScroll()}
                 onLoadingChanged={(value) => this._onLoadingChanged(value)}
             />
