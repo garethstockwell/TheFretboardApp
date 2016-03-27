@@ -23,7 +23,7 @@ const Styles = require('../Styles')
  *      ...Scene.propTypes
  */
 class SceneMenu extends Scene {
-    _createRow(data) {
+    createRow(data) {
         return (
             <View
                 key={data[0]}
@@ -38,11 +38,11 @@ class SceneMenu extends Scene {
         );
     }
 
-    _todo() {
+    onUnconnected() {
         console.log('TODO: connect up this button');
     }
 
-    _renderHeading(text) {
+    renderHeading(text) {
         return (
             <View style={Styles.viewDialogHeading}>
                 <Text style={Styles.textDialogHeading}>
@@ -52,13 +52,13 @@ class SceneMenu extends Scene {
         );
     }
 
-    _renderSpacer() {
+    renderSpacer() {
         return (
             <View style={Styles.viewDialogSectionSpacer} />
         );
     }
 
-    _renderAccountGuest() {
+    renderAccountGuest() {
         const rows = [
             ['Log in', this.props.onPressLogOut],
         ];
@@ -74,19 +74,19 @@ class SceneMenu extends Scene {
                     </View>
                 </View>
 
-                {rows.map(this._createRow)}
+                {rows.map(this.createRow)}
             </View>
         );
     }
 
-    _renderAccountUser() {
+    renderAccountUser() {
         const rows = [
             ['Log out', this.props.onPressLogOut],
-            ['Bookmarks', this._todo],
-            ['Notifications', this._todo],
-            ['Messages', this._todo],
-            ['My discussions', this._todo],
-            ['My drafts', this._todo],
+            ['Bookmarks', this.onUnconnected],
+            ['Notifications', this.onUnconnected],
+            ['Messages', this.onUnconnected],
+            ['My discussions', this.onUnconnected],
+            ['My drafts', this.onUnconnected],
         ];
 
         // TODO: maintain route stack when logging out
@@ -98,36 +98,36 @@ class SceneMenu extends Scene {
                     </Text>
                 </View>
 
-                {rows.map(this._createRow)}
+                {rows.map(this.createRow)}
             </View>
         );
     }
 
-    _onPressCategoryList() {
+    onPressCategoryList() {
         this.props.onPressCategoryList(this.props.navigator);
     }
 
-    _renderNavigation() {
+    renderNavigation() {
         const rows = [
-            ['Search', this._todo],
-            ['Categories', this._onPressCategoryList.bind(this)],
-            ['Recent discussions', this._todo],
-            ['Activity', this._todo],
-            ["Who's online", this._todo],
+            ['Search', this.onUnconnected],
+            ['Categories', this.onPressCategoryList.bind(this)],
+            ['Recent discussions', this.onUnconnected],
+            ['Activity', this.onUnconnected],
+            ["Who's online", this.onUnconnected],
         ];
 
-        return rows.map(this._createRow);
+        return rows.map(this.createRow);
     }
 
-    _renderAccount() {
+    renderAccount() {
         if (this.props.username) {
-            return this._renderAccountUser();
+            return this.renderAccountUser();
         } else {
-            return this._renderAccountGuest();
+            return this.renderAccountGuest();
         }
     }
 
-    _renderDevelopment() {
+    renderDevelopment() {
         return (
             <View style={Styles.viewDialogRow}>
                 <View style={Styles.viewDialogLabel}>
@@ -155,18 +155,18 @@ class SceneMenu extends Scene {
         return (
             <ScrollView style={Styles.scrollViewDialog}>
                 <View style={[Styles.viewContainer, Styles.viewMargin]}>
-                    {this._renderHeading('Navigation')}
-                    {this._renderNavigation()}
+                    {this.renderHeading('Navigation')}
+                    {this.renderNavigation()}
 
-                    {this._renderSpacer()}
+                    {this.renderSpacer()}
 
-                    {this._renderHeading('Account')}
-                    {this._renderAccount()}
+                    {this.renderHeading('Account')}
+                    {this.renderAccount()}
 
-                    {this._renderSpacer()}
+                    {this.renderSpacer()}
 
-                    {this._renderHeading('Development')}
-                    {this._renderDevelopment()}
+                    {this.renderHeading('Development')}
+                    {this.renderDevelopment()}
                 </View>
             </ScrollView>
         );

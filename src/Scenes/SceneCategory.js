@@ -34,8 +34,8 @@ class SceneCategory extends Scene {
                 onPress={(discussionData) =>
                         this.props.onPressDiscussion(
                             this.props.navigator, discussionData)}
-                onScroll={() => this._onScroll()}
-                onLoadingChanged={(value) => this._onLoadingChanged(value)}
+                onScroll={() => this.onScroll()}
+                onLoadingChanged={(value) => this.onLoadingChanged(value)}
             />
         );
     }

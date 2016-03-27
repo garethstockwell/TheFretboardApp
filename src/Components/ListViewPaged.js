@@ -51,14 +51,14 @@ class ListViewPaged extends React.Component {
         };
     }
 
-    _pageBarItem() {
+    pageBarItem() {
         var totalNumItems = this.props.totalNumItems || 0;
         var itemsPerPage = this.props.itemsPerPage;
         var data = {
             numPages: Math.floor(
                 (totalNumItems + itemsPerPage - 1) / itemsPerPage),
         };
-        console.log(this.constructor.name + '._pageBarItem'
+        console.log(this.constructor.name + '.pageBarItem'
             + ' totalNumItems ' + totalNumItems
             + ' itemsPerPage ' + itemsPerPage
             + ' numPages ' + data.numPages);
@@ -82,7 +82,7 @@ class ListViewPaged extends React.Component {
                 + ' currentPage ' + this.props.currentPage
                 + ' numItems ' + data.length);
 
-        var pageBarItem = this._pageBarItem();
+        var pageBarItem = this.pageBarItem();
 
         if (pageBarItem.numPages > 1) {
             data.splice(0, 0, pageBarItem);
