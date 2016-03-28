@@ -92,7 +92,7 @@ class ListViewSectioned extends React.Component {
                 dataSource={this.state.dataSource}
                 renderRow={this.props.renderRow}
                 renderSectionHeader={this.props.renderSectionHeader}
-                style={Styles.listview}
+                style={Styles.viewContainer}
                 onScroll={this.props.onScroll}
             />
         );

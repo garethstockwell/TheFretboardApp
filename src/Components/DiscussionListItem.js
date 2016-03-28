@@ -27,8 +27,8 @@ class DiscussionListItem extends React.Component {
             <TouchableHighlight
                 onPress={() => this.props.onPress(this.props.discussionData)}
             >
-                <View style={Styles.li}>
-                    <Text style={Styles.liText}>
+                <View style={Styles.viewListItem}>
+                    <Text style={Styles.textListItem}>
                         {this.props.discussionData.Name}
                     </Text>
                 </View>
