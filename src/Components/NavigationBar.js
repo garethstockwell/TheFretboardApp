@@ -48,7 +48,7 @@ class NavigationBar extends React.Component {
                     >
                         <Image
                             source={require('../../images/LogoSmall.png')}
-                            style={Styles.iconNavbar}
+                            style={Styles.imageNavbar}
                         />
                     </TouchableWithoutFeedback>
                 </View>

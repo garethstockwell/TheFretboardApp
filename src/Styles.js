@@ -35,7 +35,7 @@ var DIM = {
         INDENT:                    20,
 
         MARGIN_LOGIN:              10,
-        HEIGHT_LOGIN_TITLE:        70,
+        HEIGHT_LOGIN_TITLE:        100,
         HEIGHT_LOGIN_STATUS:       50,
         HEIGHT_LOGIN_FORM:         200,
         WIDTH_LOGIN_LABEL:         120,
@@ -131,10 +131,16 @@ const styles = StyleSheet.create({
         height: DIM.HEIGHT_LOGIN_TITLE,
         margin: DIM.MARGIN_LOGIN,
         borderBottomColor: COLOR.WHITE,
-        borderBottomWidth: DIM.WIDTH_LOGIN_DIVIDER,
+        //borderBottomWidth: DIM.WIDTH_LOGIN_DIVIDER,
         alignSelf: 'stretch',
         alignItems: 'center',
         justifyContent: 'center',
+    },
+
+    imageLoginTitle: {
+        flex: 1,
+        height: DIM.HEIGHT_LOGIN_TITLE,
+        width: Dimensions.get('window').width - 2 * DIM.MARGIN_LOGIN,
     },
 
     viewLoginBody: {
@@ -235,7 +241,7 @@ const styles = StyleSheet.create({
          //borderColor: COLOR.WHITE,
      },
 
-     iconNavbar: {
+     imageNavbar: {
          height: DIM.NAVBAR_ICON,
          width: DIM.NAVBAR_ICON,
      },
