@@ -58,7 +58,7 @@ class Scene extends React.Component {
     renderLoading() {
         if (this.state.loading) {
             return (
-                <View style={Styles.spinnerView}>
+                <View style={Styles.viewSceneSpinner}>
                     <Spinner />
                 </View>
             );

@@ -25,7 +25,7 @@ class Spinner extends React.Component {
                 indeterminate={true}
                 styleAttr={'Large'}
                 color={'white'}
-                style={Styles.spinner} />
+                style={Styles.viewContainer} />
         );
     }
 };

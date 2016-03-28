@@ -43,9 +43,9 @@ class PageBar extends React.Component {
     renderPrev() {
         if (this.props.currentPage > 1) {
             return (
-                <View style={Styles.pageBarLeft}>
+                <View style={Styles.viewPageBarLeft}>
                     <TouchableHighlight onPress={() => this.goToPrev()}>
-                        <Text style={Styles.liPageBarText}>
+                        <Text style={Styles.textPageBar}>
                             &lt;
                         </Text>
                     </TouchableHighlight>
@@ -56,8 +56,8 @@ class PageBar extends React.Component {
 
     renderStatus() {
         return (
-            <View style={Styles.pageBarCenter}>
-                <Text style={Styles.liPageBarText}>
+            <View style={Styles.viewPageBarCenter}>
+                <Text style={Styles.textPageBar}>
                     Page {this.props.currentPage} of {this.props.numPages}
                 </Text>
             </View>
@@ -67,9 +67,9 @@ class PageBar extends React.Component {
     renderNext() {
         if (this.props.currentPage < this.props.numPages) {
             return (
-                <View style={Styles.pageBarRight}>
+                <View style={Styles.viewPageBarRight}>
                     <TouchableHighlight onPress={() => this.goToNext()}>
-                        <Text style={Styles.liPageBarText}>
+                        <Text style={Styles.textPageBar}>
                             &gt;
                         </Text>
                     </TouchableHighlight>
@@ -80,7 +80,7 @@ class PageBar extends React.Component {
 
     render() {
         return (
-            <View style={Styles.liPageBar}>
+            <View style={Styles.viewListItemPageBar}>
                 {this.renderPrev()}
                 {this.renderStatus()}
                 {this.renderNext()}

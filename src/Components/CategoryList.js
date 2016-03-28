@@ -74,8 +74,8 @@ class CategoryList extends React.Component {
 
     renderSectionHeader(sectionData, sectionID) {
         return (
-            <View style={Styles.liSectionHeading}>
-                <Text style={Styles.liSectionHeadingText}>
+            <View style={Styles.viewListSectionHeading}>
+                <Text style={Styles.textListSectionHeading}>
                     {sectionData.Name}
                 </Text>
             </View>

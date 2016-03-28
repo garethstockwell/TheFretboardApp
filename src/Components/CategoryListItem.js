@@ -33,8 +33,8 @@ class CategoryListItem extends React.Component {
             <TouchableHighlight
                 onPress={() => this.props.onPress(this.props.categoryData)}
             >
-                <View style={Styles.li}>
-                    <Text style={Styles.liText}>
+                <View style={Styles.viewListItem}>
+                    <Text style={Styles.textListItem}>
                         {this.props.categoryData.Name}{CountAllDiscussions}
                     </Text>
                 </View>

@@ -58,24 +58,12 @@ var DIM = {
         BORDER_RADIUS_BUTTON:      5,
         MARGIN_BUTTON:             20,
         WIDTH_BUTTON:              150,
-};
 
-var DIM_LEGACY = {
-        MARGIN_SPINNER:            50,
-        HEIGHT_SPINNER:            150,
-
-        HEIGHT_NAVBAR:             50,
-        HEIGHT_PAGEBAR:            50,
-
-        MARGIN_LOGIN:              30,
+        WIDTH_NAV_BUTTON:          50,
 
         HEIGHT_LIST_SEP:           1,
         WIDTH_LIST_MARGIN:         0,
         PADDING_LIST:              5,
-
-        MARGIN_BUTTON:             5,
-
-        NAV_BUTTON:                50,
 };
 
 var FONT_FAMILY = 'Lato';
@@ -92,16 +80,11 @@ var FONT_SIZE = {
         DIALOG_ITEM:               14,
 
         BUTTON:                    16,
-};
 
-var FONT_SIZE_LEGACY = {
-        NAVBAR:                    16,
+        PAGE_BAR:                  16,
 
-        LOGIN_LABEL:               18,
-
-        BUTTON:                    22,
-
-        TITLE:                     16,
+        LIST_ITEM:                 16,
+        LIST_SECTION_HEADING:      16,
 };
 
 const styles = StyleSheet.create({
@@ -302,6 +285,17 @@ const styles = StyleSheet.create({
          marginTop: DIM.HEIGHT_NAVBAR,
      },
 
+     viewSceneSpinner: {
+         position: 'absolute',
+         top: 0,
+         left: 0,
+         right: 0,
+         bottom: 0,
+         alignItems: 'center',
+         backgroundColor: COLOR.BLUE_DARK,
+         justifyContent: 'center',
+     },
+
     /*
      * SceneDialog
      */
@@ -372,115 +366,76 @@ const styles = StyleSheet.create({
     },
 
     /*
-     * Legacy
+     * PageBar
      */
 
-    listview: {
-        flex: 1,
-        alignSelf: 'stretch',
+    viewPageBarLeft: {
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        width: DIM.WIDTH_NAV_BUTTON,
     },
 
-    li: {
+    viewPageBarCenter: {
+        flex: 1,
+        alignItems: 'center',
+    },
+
+    viewPageBarRight: {
+        position: 'absolute',
+        top: 0,
+        right: 0,
+        width: DIM.WIDTH_NAV_BUTTON,
+    },
+
+    textPageBar: {
+        color: COLOR.WHITE,
+        fontSize: FONT_SIZE.PAGE_BAR,
+        fontWeight: 'bold',
+    },
+
+    /*
+     * ListView item
+     */
+
+    viewListItem: {
         backgroundColor: COLOR.WHITE,
         borderWidth: 0,
-        marginHorizontal: DIM_LEGACY.WIDTH_LIST_MARGIN,
+        marginHorizontal: DIM.WIDTH_LIST_MARGIN,
         marginTop: 0,
-        marginBottom: DIM_LEGACY.HEIGHT_LIST_SEP,
-        padding: DIM_LEGACY.PADDING_LIST,
+        marginBottom: DIM.HEIGHT_LIST_SEP,
+        padding: DIM.PADDING_LIST,
     },
 
-    liText: {
+    textListItem: {
         color: COLOR.BLUE_DARK,
-        fontSize: FONT_SIZE_LEGACY.TITLE,
+        fontSize: FONT_SIZE.LIST_ITEM,
     },
 
-    liSectionHeading: {
+    viewListItemPageBar: {
         backgroundColor: COLOR.BLUE_MID,
         borderWidth: 0,
-        marginHorizontal: DIM_LEGACY.WIDTH_LIST_MARGIN,
+        marginHorizontal: DIM.WIDTH_LIST_MARGIN,
         marginTop: 0,
-        marginBottom: DIM_LEGACY.HEIGHT_LIST_SEP,
-        padding: DIM_LEGACY.PADDING_LIST,
-        height: DIM_LEGACY.HEIGHT_PAGE_BAR,
+        marginBottom: DIM.HEIGHT_LIST_SEP,
+        padding: DIM.PADDING_LIST,
+        height: DIM.HEIGHT_PAGE_BAR,
     },
 
-    liSectionHeadingText: {
-        color: COLOR.WHITE,
-        fontSize: FONT_SIZE_LEGACY.TITLE,
-        fontWeight: 'bold',
-    },
-
-    liPageBar: {
+    viewListSectionHeading: {
         backgroundColor: COLOR.BLUE_MID,
         borderWidth: 0,
-        marginHorizontal: DIM_LEGACY.WIDTH_LIST_MARGIN,
+        marginHorizontal: DIM.WIDTH_LIST_MARGIN,
         marginTop: 0,
-        marginBottom: DIM_LEGACY.HEIGHT_LIST_SEP,
-        padding: DIM_LEGACY.PADDING_LIST,
-        height: DIM_LEGACY.HEIGHT_PAGE_BAR,
+        marginBottom: DIM.HEIGHT_LIST_SEP,
+        padding: DIM.PADDING_LIST,
+        height: DIM.HEIGHT_PAGE_BAR,
     },
 
-    liPageBarText: {
+    textListSectionHeading: {
         color: COLOR.WHITE,
-        fontSize: FONT_SIZE_LEGACY.TITLE,
+        fontSize: FONT_SIZE.LIST_SECTION_HEADING,
         fontWeight: 'bold',
-    },
-
-    spinnerView: {
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
-        alignItems: 'center',
-        backgroundColor: COLOR.BLUE_DARK,
-        justifyContent: 'center',
-    },
-
-    spinner: {
-        flex: 1,
-    },
-
-    navText: {
-        color: COLOR.WHITE,
-        fontSize: FONT_SIZE_LEGACY.TITLE,
-    },
-
-    titleView: {
-        height: 2 * DIM_LEGACY.HEIGHT_NAVBAR,
-        backgroundColor: COLOR.BLUE_MID,
-        alignItems: 'center',
-    },
-
-    titleText: {
-        color: COLOR.WHITE,
-        fontSize: FONT_SIZE_LEGACY.TITLE,
-        fontWeight: 'bold',
-    },
-
-    todoText: {
-        color: COLOR.RED,
-        fontSize: FONT_SIZE_LEGACY.TITLE,
-        fontWeight: 'bold',
-    },
-
-    pageBarLeft: {
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        width: DIM_LEGACY.NAV_BUTTON,
-    },
-
-    pageBarCenter: {
-        flex: 1,
-        alignItems: 'center',
-    },
-
-    pageBarRight: {
-        position: 'absolute',
-        top: 0,
-        right: 0,
-        width: DIM_LEGACY.NAV_BUTTON,
     },
 });
 

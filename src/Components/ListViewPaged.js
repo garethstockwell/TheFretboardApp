@@ -120,7 +120,7 @@ class ListViewPaged extends React.Component {
                 ref={(component) => this.listView = component}
                 dataSource={this.state.dataSource}
                 renderRow={this.renderRow.bind(this)}
-                style={Styles.listview}
+                style={Styles.viewContainer}
                 onScroll={this.props.onScroll}
             />
         );
