@@ -8,6 +8,7 @@
 
 import React, {
     Component,
+    Image,
     Navigator,
     Switch,
     Text,
@@ -178,9 +179,10 @@ class SceneLogin extends Component {
         return (
             <View style={Styles.viewLogin}>
                 <View style={Styles.viewLoginTitle}>
-                    <Text style={Styles.textLoginTitle}>
-                        The Fretboard
-                    </Text>
+                    <Image
+                        source={require('../../images/LogoLarge.png')}
+                        style={Styles.imageLoginTitle}
+                    />
                 </View>
 
                 <View style={Styles.viewLoginBody}>
