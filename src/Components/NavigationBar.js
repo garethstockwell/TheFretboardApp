@@ -6,6 +6,7 @@
 
 import React, {
     Component,
+    Image,
     Text,
     TouchableWithoutFeedback,
     View,
@@ -45,9 +46,10 @@ class NavigationBar extends React.Component {
                     <TouchableWithoutFeedback
                         onPress={() => this.props.onPressMenu(this.props.navigator)}
                     >
-                        <Text style={Styles.textNavbarButton}>
-                            Menu
-                        </Text>
+                        <Image
+                            source={require('../../images/LogoSmall.png')}
+                            style={Styles.iconNavbar}
+                        />
                     </TouchableWithoutFeedback>
                 </View>
 

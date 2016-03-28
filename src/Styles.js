@@ -45,7 +45,8 @@ var DIM = {
         WIDTH_LOGIN_SWITCH:        50,
 
         HEIGHT_NAVBAR:             50,
-        WIDTH_NAVBAR_BUTTON:       50,
+        NAVBAR_BUTTON:             50,
+        NAVBAR_ICON:               40,
 
         HEIGHT_TOOLBAR:            50,
 
@@ -225,12 +226,18 @@ const styles = StyleSheet.create({
      },
 
      viewNavbarButton: {
-         width: DIM.WIDTH_NAVBAR_BUTTON,
+         height: DIM.NAVBAR_BUTTON,
+         width: DIM.NAVBAR_BUTTON,
          alignSelf: 'stretch',
          alignItems: 'center',
          justifyContent: 'center',
          //borderWidth: DIM.BORDER_WIDTH_BUTTON,
          //borderColor: COLOR.WHITE,
+     },
+
+     iconNavbar: {
+         height: DIM.NAVBAR_ICON,
+         width: DIM.NAVBAR_ICON,
      },
 
      viewNavbarTitle: {
