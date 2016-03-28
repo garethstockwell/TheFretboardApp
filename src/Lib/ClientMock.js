@@ -11,6 +11,8 @@ var Client = require('./Client');
 
 const RESPONSE_DELAY = 1000;
 
+const DISCUSSIONS_PER_PAGE = 20;
+
 class ClientMock {
     _request(result, responseCallback, error, errorCallback) {
         var wrapper = new Client.Response(responseCallback, errorCallback);
@@ -104,11 +106,9 @@ class ClientMock {
             + ' pageIndex ' + pageIndex
             + ' itemIndex ' + itemIndex);
 
-        var discussionsPerPage = 20;
-
         var discussions = []
-        for (var i = 1; i <= discussionsPerPage; ++i) {
-            var DiscussionID = (discussionsPerPage * (pageIndex - 1)) + i;
+        for (var i = 1; i <= DISCUSSIONS_PER_PAGE; ++i) {
+            var DiscussionID = (DISCUSSIONS_PER_PAGE * (pageIndex - 1)) + i;
             discussions.push(
                 {
                     DiscussionID: DiscussionID,
