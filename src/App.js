@@ -27,19 +27,21 @@ const Styles = require('./Styles');
 
 // Based on
 // http://blog.paracode.com/2016/01/05/routing-and-navigation-in-react-native/
-var navigator;
 function androidAddBackButtonListener(navigator) {
-    if (!navigator) {
-        navigator = navigator;
+    console.log('App.androidAddBackButtonListener');
 
-        BackAndroid.addEventListener('hardwareBackPress', () => {
-            if (navigator.getCurrentRoutes().length === 1) {
-                return false;
-            }
-            navigator.pop();
-            return true;
-        });
-    }
+    BackAndroid.addEventListener('hardwareBackPress', () => {
+        var routesLength = navigator.getCurrentRoutes().length;
+
+        console.log('App.backAndroid routesLength ' + routesLength);
+
+        if (routesLength === 1) {
+            return false;
+        }
+
+        navigator.pop();
+        return true;
+    });
 }
 
 class App extends Component {
@@ -97,6 +99,7 @@ class App extends Component {
     renderNavigator() {
         return (
             <Navigator
+                ref={(navigator) => androidAddBackButtonListener(navigator)}
                 configureScene={(route) => {
                     if (route.sceneConfig) {
                         return route.sceneConfig;
@@ -122,7 +125,7 @@ class App extends Component {
     }
 
     renderScene(route, navigator) {
-        androidAddBackButtonListener(navigator);
+        console.log('App.renderScene ' + this.getRoute(navigator));
 
         if (route.id === 'SceneLogin') {
             return (
@@ -142,7 +145,7 @@ class App extends Component {
                     client={this.client()}
                     username={this.state.username}
                     onPressLogOut={this.logOut.bind(this)}
-                    onPressCategoryList={this.navCategoryList}
+                    onPressCategoryList={this.navCategoryList.bind(this)}
                     serverDomain={this.state.serverDomain}
                     onServerDomainChange={this.setServerDomain.bind(this)}
                     {...route.passProps}
@@ -156,7 +159,7 @@ class App extends Component {
                     navigator={navigator}
                     navigationBar={this.navigationBar()}
                     client={this.client()}
-                    onPressCategory={this.navCategory}
+                    onPressCategory={this.navCategory.bind(this)}
                     {...route.passProps}
                 />
             );
@@ -168,7 +171,7 @@ class App extends Component {
                     navigator={navigator}
                     navigationBar={this.navigationBar()}
                     client={this.client()}
-                    onPressDiscussion={this.navDiscussion}
+                    onPressDiscussion={this.navDiscussion.bind(this)}
                     {...route.passProps}
                 />
             );
@@ -215,16 +218,32 @@ class App extends Component {
 
     // Navigation methods
 
+    getRoute(navigator) {
+        var routes = navigator.getCurrentRoutes();
+        var ids = [];
+        for (var i = 0; i < routes.length; ++i) {
+            ids.push(routes[i].id);
+        }
+        return ids;
+    }
+
     navMenu(navigator) {
         console.log('App.navMenu ' + navigator);
 
-        navigator.push({
-            id: 'SceneMenu',
-            title: 'Menu',
+        var routes = navigator.getCurrentRoutes();
+        if (routes.length && routes[routes.length - 1].id == 'SceneMenu') {
+            // Close the menu
+            navigator.pop();
+        } else {
+            // Open the menu
+            navigator.push({
+                id: 'SceneMenu',
+                title: 'Menu',
 
-            // Should be FloatFromBottom, but this isn't implemented
-            //sceneConfig: Navigator.SceneConfigs.FadeAndroid,
-        })
+                // Should be FloatFromBottom, but this isn't implemented
+                //sceneConfig: Navigator.SceneConfigs.FadeAndroid,
+            })
+        }
     }
 
     navCategoryList(navigator) {
