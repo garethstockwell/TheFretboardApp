@@ -44,7 +44,7 @@ class CategoryList extends React.Component {
 
         this.props.onLoadingChanged(true);
 
-        this.props.client.getCategoryListSectioned(
+        this.props.client.getCategoryList(
             this.onGetCategoryListResponse.bind(this),
             this.onClientError.bind(this)
         );

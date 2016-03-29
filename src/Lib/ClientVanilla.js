@@ -52,8 +52,8 @@ class ClientVanilla extends ClientMock {
      *
      * rowIDs is an array of arrays of category IDs.
      */
-    getCategoryListSectioned(responseCallback, errorCallback) {
-        console.log('ClientVanilla.getCategoryListSectioned');
+    getCategoryList(responseCallback, errorCallback) {
+        console.log('ClientVanilla.getCategoryList');
         var process = function(response) {
             var inData = response.Categories;
 

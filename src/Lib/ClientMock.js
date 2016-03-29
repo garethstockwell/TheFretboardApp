@@ -55,8 +55,8 @@ class ClientMock {
      *
      * rowIDs is an array of arrays of category IDs.
      */
-    getCategoryListSectioned(responseCallback, errorCallback) {
-        console.log('ClientMock.getCategoryListSectioned');
+    getCategoryList(responseCallback, errorCallback) {
+        console.log('ClientMock.getCategoryList');
 
         var result = {
             dataBlob: {
