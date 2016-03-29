@@ -13,11 +13,9 @@ import React, {
     View,
 } from 'react-native';
 
-import ClientMock from './Lib/ClientMock';
-import ClientVanilla from './Lib/ClientVanilla';
-
+const Client = require('./Lib/Client');
+const Constants = require('./Constants');
 const NavigationBar = require('./Components/NavigationBar');
-//const NavigationBar = require('./Components/NavigationBarBreadcrumb');
 const SceneCategoryList = require('./Scenes/SceneCategoryList');
 const SceneCategory = require('./Scenes/SceneCategory');
 const SceneDiscussion = require('./Scenes/SceneDiscussion');
@@ -51,18 +49,14 @@ class App extends Component {
         super(props);
 
         this.state = {
-            serverDomain: '',
+            server: Constants.SERVER_DEFAULT,
             login: true,
             username: null,
         };
     }
 
     client() {
-        if (this.state.serverDomain == '') {
-            return new ClientMock();
-        } else {
-            return new ClientVanilla(this.state.serverDomain);
-        }
+        return Client.create(this.state.server);
     }
 
     navigationBar() {
@@ -150,8 +144,8 @@ class App extends Component {
                     onPressLogOut={this.logOut.bind(this)}
                     onPressCategoryList={this.navCategoryList.bind(this)}
                     onPressNotImplemented={this.navNotImplemented.bind(this)}
-                    serverDomain={this.state.serverDomain}
-                    onServerDomainChange={this.setServerDomain.bind(this)}
+                    server={this.state.server}
+                    onServerChange={this.setServer.bind(this)}
                     {...route.passProps}
                 />
             );
@@ -218,12 +212,14 @@ class App extends Component {
 
     // DEV methods
 
-    setServerDomain(serverDomain) {
-        if (this.state.serverDomain != serverDomain) {
-            console.log('App.setServerDomain ' + serverDomain);
+    setServer(server) {
+        if (this.state.server != server) {
+            console.log('App.setServer'
+                + ' api ' + server.api
+                + ' domain ' + server.domain);
 
             this.setState({
-                serverDomain: serverDomain,
+                server: server,
                 login: true,
                 username: null,
             });

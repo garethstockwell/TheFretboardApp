@@ -6,13 +6,10 @@
 
 'use strict';
 
-import React, {
-    Text,
-    View,
-} from 'react-native';
+import React from 'react-native';
 
 const Scene = require('./Scene');
-const Styles = require('../Styles')
+const Utils = require('../Lib/Utils');
 
 /*! Scene used to indicate that a function is not implemented
  *
@@ -21,13 +18,7 @@ const Styles = require('../Styles')
  */
 class SceneNotImplemented extends Scene {
     renderBody() {
-        return (
-            <View style={[Styles.viewContainer, Styles.viewCenter]}>
-                <Text style={Styles.textError}>
-                    Not implemented
-                </Text>
-            </View>
-        );
+        return Utils.errorComponent('Not implemented');
     }
 }
 

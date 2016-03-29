@@ -7,13 +7,13 @@
 
 'use strict';
 
-var Client = require('./Client');
+var ClientUtils = require('./ClientUtils');
 
 const DISCUSSIONS_PER_PAGE = 20;
 
 class ClientMock {
     logIn(username, password, callback) {
-        return Client.dummyLogIn(username, password, callback);
+        return ClientUtils.dummyLogIn(username, password, callback);
     }
 
     /* Return list of all categories.
@@ -56,7 +56,7 @@ class ClientMock {
             ],
         };
 
-        return Client.dummyRequest(result, responseCallback, null, null);
+        return ClientUtils.dummyRequest(result, responseCallback, null, null);
     }
 
     /* Returns a list of all discussions in a specified category.
@@ -85,7 +85,7 @@ class ClientMock {
             discussions: discussions
         };
 
-        return Client.dummyRequest(result, responseCallback, null, null);
+        return ClientUtils.dummyRequest(result, responseCallback, null, null);
     }
 };
 

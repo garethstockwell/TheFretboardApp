@@ -14,6 +14,7 @@ import React, {
 } from 'react-native';
 
 const Button = require('../Components/Button');
+const Constants = require('../Constants');
 const Scene = require('./Scene');
 const Styles = require('../Styles')
 
@@ -31,10 +32,10 @@ const Styles = require('../Styles')
  *      onPressNotImplemented: function(navigator)
  *          required: true
  *
- *      onServerDomainChange: function(string)
+ *      onServerChange: function(object)
  *          required: dev builds
  *
- *      serverDomain: string
+ *      server: object
  *          required: dev builds
  *
  *      username: string
@@ -145,7 +146,26 @@ class SceneMenu extends Scene {
         }
     }
 
+    onServerChange(server) {
+        console.log('onServerChange: ' + server.name);
+    }
+
     renderDevelopment() {
+        const servers = [
+            Constants.SERVER.FRETBOARD_DEV,
+            Constants.SERVER.MOCK,
+            Constants.SERVER.XAMARIN,
+        ];
+
+        var createServerPickerItem = function(server) {
+            return (
+                <Picker.Item
+                    key={server}
+                    label={server.name}
+                    value={server} />
+            );
+        }
+
         return (
             <View style={Styles.viewDialogRow}>
                 <View style={Styles.viewDialogLabel}>
@@ -157,12 +177,10 @@ class SceneMenu extends Scene {
                 <View style={Styles.viewDialogField}>
                     <Picker
                         style={Styles.pickerDialog}
-                        selectedValue={this.props.serverDomain}
-                        onValueChange={this.props.onServerDomainChange}
+                        selectedValue={this.props.server}
+                        onValueChange={this.props.onServerChange}
                     >
-                        <Picker.Item label='Mock' value='' />
-                        <Picker.Item label='forums.xamarin.com' value='forums.xamarin.com' />
-                        <Picker.Item label='fretboard.nick-long.com' value='fretboard.nick-long.com' />
+                        {servers.map(createServerPickerItem)}
                     </Picker>
                 </View>
             </View>

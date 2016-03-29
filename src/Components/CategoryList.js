@@ -13,6 +13,7 @@ import React, {
 const CategoryListItem = require('./CategoryListItem');
 const ListViewSectioned = require('./ListViewSectioned');
 const Styles = require('../Styles');
+const Utils = require('../Lib/Utils');
 
 /*! List of discussion categories
  *
@@ -73,6 +74,7 @@ class CategoryList extends React.Component {
     }
 
     renderSectionHeader(sectionData, sectionID) {
+        console.log('CategoryList.renderSectionHeader');
         return (
             <View style={Styles.viewListSectionHeading}>
                 <Text style={Styles.textListSectionHeading}>
@@ -83,6 +85,7 @@ class CategoryList extends React.Component {
     }
 
     renderRow(categoryData) {
+        console.log('CategoryList.renderRow');
         return (
             <CategoryListItem
                 categoryData={categoryData}
@@ -93,10 +96,9 @@ class CategoryList extends React.Component {
 
     renderBody() {
         if (this.state.error) {
-            console.log('CategoryList.renderBody error');
-            return (
-                <Text>ERROR</Text>
-            );
+            console.log('CategoryList.renderBody error: '
+                + this.state.error.message);
+            return Utils.errorComponent(this.state.error.message);
         } else {
             if (this.state.data != null) {
                 return (

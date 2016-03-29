@@ -4,6 +4,8 @@ This file captures miscellaneous TODO items which are not recorded in the REQUIR
 
 ## Definitely
 
+* Replace ListViewSectioned with a tree view.
+   * Category nesting depth may be greater than one level.
 * "Dev build" Flag
    * Show a message on the login screen
    * Use dev server URL
