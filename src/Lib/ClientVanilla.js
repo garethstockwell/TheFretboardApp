@@ -8,12 +8,15 @@
 'use strict';
 
 import Client from './Client';
-import ClientMock from './ClientMock';
 
-class ClientVanilla extends ClientMock {
+class ClientVanilla {
     constructor(domain) {
         super();
         this.url = 'http://' + domain + '/api/v1';
+    }
+
+    logIn(username, password, callback) {
+        return Client.dummyLogIn(username, password, callback);
     }
 
     _fetch(url, process, responseCallback, errorCallback) {
@@ -95,16 +98,6 @@ class ClientVanilla extends ClientMock {
                 '/categories/list.json',
                 (data => process(data)),
                 responseCallback, errorCallback);
-    }
-
-    /* Returns a list of all discussions.
-     *
-     * TODO: pagination.
-     */
-    getDiscussionList(callback) {
-        console.log('ClientVanilla.getDiscussionList');
-        return this._fetch('/discussions/list.json',
-                (data => this._objectValues(data.Discussions)), callback);
     }
 
     /* Returns a list of all discussions in a specified category.

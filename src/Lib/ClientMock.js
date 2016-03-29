@@ -9,39 +9,11 @@
 
 var Client = require('./Client');
 
-const RESPONSE_DELAY = 1000;
-
 const DISCUSSIONS_PER_PAGE = 20;
 
 class ClientMock {
-    _request(result, responseCallback, error, errorCallback) {
-        var wrapper = new Client.Response(responseCallback, errorCallback);
-
-        setTimeout(
-            () => {
-                if (error) {
-                    wrapper.errorCallback(error);
-                } else {
-                    wrapper.responseCallback(result);
-                }
-            },
-            RESPONSE_DELAY
-        );
-
-        return wrapper;
-    }
-
-    /* Log in
-     *
-     */
     logIn(username, password, callback) {
-        console.log('ClientMock.logIn'
-            + ' username ' + username
-            + ' password ' + password);
-
-        var result = (username == 'test' && password == 'abc');
-
-        return this._request(result, callback, null, null);
+        return Client.dummyLogIn(username, password, callback);
     }
 
     /* Return list of all categories.
@@ -84,16 +56,7 @@ class ClientMock {
             ],
         };
 
-        return this._request(result, responseCallback, null, null);
-    }
-
-    /* Returns a list of all discussions.
-     *
-     * TODO: pagination.
-     */
-    getDiscussionList(callback) {
-        console.log('ClientMock.getDiscussionList');
-
+        return Client.dummyRequest(result, responseCallback, null, null);
     }
 
     /* Returns a list of all discussions in a specified category.
@@ -122,7 +85,7 @@ class ClientMock {
             discussions: discussions
         };
 
-        return this._request(result, responseCallback, null, null);
+        return Client.dummyRequest(result, responseCallback, null, null);
     }
 };
 

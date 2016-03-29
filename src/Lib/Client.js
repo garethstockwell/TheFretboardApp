@@ -48,7 +48,41 @@ class Response {
     }
 };
 
+var dummyRequest = function(result, responseCallback, error, errorCallback) {
+    const RESPONSE_DELAY = 1000;
+
+    var wrapper = new Response(responseCallback, errorCallback);
+
+    setTimeout(
+        () => {
+            if (error) {
+                wrapper.errorCallback(error);
+            } else {
+                wrapper.responseCallback(result);
+            }
+        },
+        RESPONSE_DELAY
+    );
+
+    return wrapper;
+}
+
+var dummyLogIn = function(username, password, callback) {
+    console.log('Client.dummyLogIn'
+        + ' username ' + username
+        + ' password ' + password);
+
+    const USERNAME = 'test';
+    const PASSWORD = 'abc';
+
+    var result = (username == USERNAME && password == PASSWORD);
+
+    return dummyRequest(result, callback, null, null);
+}
+
 module.exports = {
     checkStatus: checkStatus,
+    dummyLogIn: dummyLogIn,
+    dummyRequest: dummyRequest,
     Response: Response
 };
