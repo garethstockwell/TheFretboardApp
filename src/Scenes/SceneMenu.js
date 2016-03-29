@@ -23,7 +23,7 @@ const Styles = require('../Styles')
  *      ...Scene.propTypes
  */
 class SceneMenu extends Scene {
-    createRow(data) {
+    createButtonRow(data) {
         return (
             <View
                 key={data[0]}
@@ -34,6 +34,28 @@ class SceneMenu extends Scene {
                     text={data[0]}
                     onPress={data[1]}
                 />
+            </View>
+        );
+    }
+
+    createInfoRow(data) {
+        return (
+            <View
+                key={data[0]}
+            >
+                <View style={Styles.viewDialogRow}>
+                    <View style={Styles.viewDialogLabel}>
+                        <Text style={Styles.textDialogItem}>
+                            {data[0]}
+                        </Text>
+                    </View>
+
+                    <View style={Styles.viewDialogField}>
+                        <Text style={Styles.textDialogItem}>
+                            {data[1]}
+                        </Text>
+                    </View>
+                </View>
             </View>
         );
     }
@@ -74,7 +96,7 @@ class SceneMenu extends Scene {
                     </View>
                 </View>
 
-                {rows.map(this.createRow)}
+                {rows.map(this.createButtonRow)}
             </View>
         );
     }
@@ -98,7 +120,7 @@ class SceneMenu extends Scene {
                     </Text>
                 </View>
 
-                {rows.map(this.createRow)}
+                {rows.map(this.createButtonRow)}
             </View>
         );
     }
@@ -116,7 +138,7 @@ class SceneMenu extends Scene {
             ["Who's online", this.onUnconnected],
         ];
 
-        return rows.map(this.createRow);
+        return rows.map(this.createButtonRow);
     }
 
     renderAccount() {
@@ -151,6 +173,15 @@ class SceneMenu extends Scene {
         )
     }
 
+    renderAbout() {
+        const rows = [
+            ['Foo', 'Bar'],
+            ['Yadda yadda yadda yadda', 'Blah'],
+        ];
+
+        return rows.map(this.createInfoRow);
+    }
+
     renderBody() {
         return (
             <ScrollView style={Styles.scrollViewDialog}>
@@ -167,6 +198,9 @@ class SceneMenu extends Scene {
 
                     {this.renderHeading('Development')}
                     {this.renderDevelopment()}
+
+                    {this.renderHeading('About')}
+                    {this.renderAbout()}
                 </View>
             </ScrollView>
         );
