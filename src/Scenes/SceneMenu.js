@@ -69,7 +69,7 @@ class SceneMenu extends Scene {
                 <View style={Styles.viewDialogRow}>
                     <View style={Styles.viewContainer}>
                         <Text style={Styles.textDialogItem}>
-                            Not loggsed in
+                            Not logged in
                         </Text>
                     </View>
                 </View>
