@@ -21,6 +21,12 @@ const Styles = require('../Styles');
  *
  *      onPressMenu: function()
  *          required: true
+ *
+ *      onPressMessages: function()
+ *          required: true
+ *
+ *      onPressNotifications: function()
+ *          required: true
  */
 class NavigationBar extends React.Component {
     constructor(props) {
@@ -44,7 +50,8 @@ class NavigationBar extends React.Component {
             <View style={Styles.viewNavbar}>
                 <View style={Styles.viewNavbarButton}>
                     <TouchableWithoutFeedback
-                        onPress={() => this.props.onPressMenu(this.props.navigator)}
+                        onPress={() => this.props.onPressMenu(
+                            this.props.navigator)}
                     >
                         <Image
                             source={require('../../images/LogoSmall.png')}
@@ -60,9 +67,25 @@ class NavigationBar extends React.Component {
                 </View>
 
                 <View style={Styles.viewNavbarButton}>
-                    <Text style={Styles.textNavbarButton}>
-                        Not
-                    </Text>
+                    <TouchableWithoutFeedback
+                        onPress={() => this.props.onPressMessages(
+                            this.props.navigator)}
+                    >
+                        <Text style={Styles.textNavbarButton}>
+                            Msgs
+                        </Text>
+                    </TouchableWithoutFeedback>
+                </View>
+
+                <View style={Styles.viewNavbarButton}>
+                    <TouchableWithoutFeedback
+                        onPress={() => this.props.onPressNotifications(
+                            this.props.navigator)}
+                    >
+                        <Text style={Styles.textNavbarButton}>
+                            Notifs
+                        </Text>
+                    </TouchableWithoutFeedback>
                 </View>
             </View>
         );

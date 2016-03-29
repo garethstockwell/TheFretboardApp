@@ -35,7 +35,7 @@ var DIM = {
         INDENT:                    20,
 
         MARGIN_LOGIN:              10,
-        HEIGHT_LOGIN_TITLE:        100,
+        HEIGHT_APP_TITLE:        100,
         HEIGHT_LOGIN_STATUS:       50,
         HEIGHT_LOGIN_FORM:         200,
         WIDTH_LOGIN_LABEL:         120,
@@ -70,12 +70,12 @@ var DIM = {
 var FONT_FAMILY = 'Lato';
 
 var FONT_SIZE = {
-        LOGIN_TITLE:               32,
+        APP_TITLE:                 32,
         LOGIN_STATUS:              18,
         LOGIN_LABEL:               18,
 
         NAVBAR_TITLE:              20,
-        NAVBAR_BUTTON:             16,
+        NAVBAR_BUTTON:             12,
 
         DIALOG_HEADING:            16,
         DIALOG_ITEM:               14,
@@ -128,7 +128,7 @@ const styles = StyleSheet.create({
     },
 
     viewLoginTitle: {
-        height: DIM.HEIGHT_LOGIN_TITLE,
+        height: DIM.HEIGHT_APP_TITLE,
         margin: DIM.MARGIN_LOGIN,
         borderBottomColor: COLOR.WHITE,
         //borderBottomWidth: DIM.WIDTH_LOGIN_DIVIDER,
@@ -139,7 +139,7 @@ const styles = StyleSheet.create({
 
     imageLoginTitle: {
         flex: 1,
-        height: DIM.HEIGHT_LOGIN_TITLE,
+        height: DIM.HEIGHT_APP_TITLE,
         width: Dimensions.get('window').width - 2 * DIM.MARGIN_LOGIN,
     },
 
@@ -172,7 +172,7 @@ const styles = StyleSheet.create({
     textLoginTitle: {
         color: COLOR.WHITE,
         fontFamily: FONT_FAMILY,
-        fontSize: FONT_SIZE.LOGIN_TITLE,
+        fontSize: FONT_SIZE.APP_TITLE,
     },
 
     textLoginStatus: {
@@ -293,20 +293,26 @@ const styles = StyleSheet.create({
      * Scene
      */
 
-     viewSceneBody: {
-         flex: 1,
-         marginTop: DIM.HEIGHT_NAVBAR,
-     },
+    textError: {
+        color: COLOR.RED,
+        fontSize: FONT_SIZE.APP_TITLE,
+        fontWeight: 'bold',
+    },
 
-     viewSceneSpinner: {
-         position: 'absolute',
-         top: 0,
-         left: 0,
-         right: 0,
-         bottom: 0,
-         alignItems: 'center',
-         backgroundColor: COLOR.BLUE_DARK,
-         justifyContent: 'center',
+    viewSceneBody: {
+        flex: 1,
+        marginTop: DIM.HEIGHT_NAVBAR,
+    },
+
+    viewSceneSpinner: {
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        alignItems: 'center',
+        backgroundColor: COLOR.BLUE_DARK,
+        justifyContent: 'center',
      },
 
     /*

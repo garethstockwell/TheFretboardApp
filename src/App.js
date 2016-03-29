@@ -23,6 +23,7 @@ const SceneCategory = require('./Scenes/SceneCategory');
 const SceneDiscussion = require('./Scenes/SceneDiscussion');
 const SceneLogin = require('./Scenes/SceneLogin');
 const SceneMenu = require('./Scenes/SceneMenu');
+const SceneNotImplemented = require('./Scenes/SceneNotImplemented');
 const Styles = require('./Styles');
 
 // Based on
@@ -68,6 +69,8 @@ class App extends Component {
         return (
             <NavigationBar
                 onPressMenu={this.navMenu.bind(this)}
+                onPressMessages={this.navNotImplemented.bind(this)}
+                onPressNotifications={this.navNotImplemented.bind(this)}
             />
         )
     }
@@ -146,8 +149,19 @@ class App extends Component {
                     username={this.state.username}
                     onPressLogOut={this.logOut.bind(this)}
                     onPressCategoryList={this.navCategoryList.bind(this)}
+                    onPressNotImplemented={this.navNotImplemented.bind(this)}
                     serverDomain={this.state.serverDomain}
                     onServerDomainChange={this.setServerDomain.bind(this)}
+                    {...route.passProps}
+                />
+            );
+        }
+
+        if (route.id === 'SceneNotImplemented') {
+            return (
+                <SceneNotImplemented
+                    navigator={navigator}
+                    navigationBar={this.navigationBar()}
                     {...route.passProps}
                 />
             );
@@ -244,6 +258,14 @@ class App extends Component {
                 //sceneConfig: Navigator.SceneConfigs.FadeAndroid,
             })
         }
+    }
+
+    navNotImplemented(navigator) {
+        console.log('App.navNotImplemented');
+
+        navigator.push({
+            id: 'SceneNotImplemented',
+        });
     }
 
     navCategoryList(navigator) {

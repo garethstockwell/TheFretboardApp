@@ -21,6 +21,24 @@ const Styles = require('../Styles')
  *
  *  propTypes:
  *      ...Scene.propTypes
+ *
+ *      onPressCategoryList: function(navigator)
+ *          required: true
+ *
+ *      onPressLogOut: function()
+ *          required: true
+ *
+ *      onPressNotImplemented: function(navigator)
+ *          required: true
+ *
+ *      onServerDomainChange: function(string)
+ *          required: dev builds
+ *
+ *      serverDomain: string
+ *          required: dev builds
+ *
+ *      username: string
+ *          required: true
  */
 class SceneMenu extends Scene {
     createRow(data) {
@@ -36,10 +54,6 @@ class SceneMenu extends Scene {
                 />
             </View>
         );
-    }
-
-    onUnconnected() {
-        console.log('TODO: connect up this button');
     }
 
     renderHeading(text) {
@@ -82,11 +96,11 @@ class SceneMenu extends Scene {
     renderAccountUser() {
         const rows = [
             ['Log out', this.props.onPressLogOut],
-            ['Bookmarks', this.onUnconnected],
-            ['Notifications', this.onUnconnected],
-            ['Messages', this.onUnconnected],
-            ['My discussions', this.onUnconnected],
-            ['My drafts', this.onUnconnected],
+            ['Bookmarks', this.onPressNotImplemented.bind(this)],
+            ['Notifications', this.onPressNotImplemented.bind(this)],
+            ['Messages', this.onPressNotImplemented.bind(this)],
+            ['My discussions', this.onPressNotImplemented.bind(this)],
+            ['My drafts', this.onPressNotImplemented.bind(this)],
         ];
 
         // TODO: maintain route stack when logging out
@@ -107,13 +121,17 @@ class SceneMenu extends Scene {
         this.props.onPressCategoryList(this.props.navigator);
     }
 
+    onPressNotImplemented() {
+        this.props.onPressNotImplemented(this.props.navigator);
+    }
+
     renderNavigation() {
         const rows = [
-            ['Search', this.onUnconnected],
+            ['Search', this.onPressNotImplemented.bind(this)],
             ['Categories', this.onPressCategoryList.bind(this)],
-            ['Recent discussions', this.onUnconnected],
-            ['Activity', this.onUnconnected],
-            ["Who's online", this.onUnconnected],
+            ['Recent discussions', this.onPressNotImplemented.bind(this)],
+            ['Activity', this.onPressNotImplemented.bind(this)],
+            ["Who's online", this.onPressNotImplemented.bind(this)],
         ];
 
         return rows.map(this.createRow);
