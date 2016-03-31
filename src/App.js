@@ -24,6 +24,15 @@ const SceneMenu = require('./Scenes/SceneMenu');
 const SceneNotImplemented = require('./Scenes/SceneNotImplemented');
 const Styles = require('./Styles');
 
+const SceneId = {
+    LOGIN: 'Login',
+    MENU: 'Menu',
+    NOT_IMPLEMENTED: 'NotImplemented',
+    CATEGORY: 'Category',
+    CATEGORY_LIST: 'CategoryList',
+    DISCUSSION: 'Discussion',
+}
+
 // Based on
 // http://blog.paracode.com/2016/01/05/routing-and-navigation-in-react-native/
 
@@ -113,7 +122,7 @@ class App extends Component {
                     return Navigator.SceneConfigs.FloatFromRight;
                 }}
                 initialRoute={{
-                    id: 'SceneCategoryList',
+                    id: SceneId.CATEGORY_LIST,
                     title: 'Categories',
                 }}
                 navigationBar={this.navigationBar()}
@@ -133,7 +142,7 @@ class App extends Component {
     renderScene(route, navigator) {
         console.log('App.renderScene ' + this.getRoute(navigator));
 
-        if (route.id === 'SceneLogin') {
+        if (route.id === SceneId.LOGIN) {
             return (
                 <SceneLogin
                     navigator={navigator}
@@ -143,7 +152,7 @@ class App extends Component {
             );
         }
 
-        if (route.id === 'SceneMenu') {
+        if (route.id === SceneId.MENU) {
             return (
                 <SceneMenu
                     navigator={navigator}
@@ -160,7 +169,7 @@ class App extends Component {
             );
         }
 
-        if (route.id === 'SceneNotImplemented') {
+        if (route.id === SceneId.NOT_IMPLEMENTED) {
             return (
                 <SceneNotImplemented
                     navigator={navigator}
@@ -170,7 +179,7 @@ class App extends Component {
             );
         }
 
-        if (route.id === 'SceneCategoryList') {
+        if (route.id === SceneId.CATEGORY_LIST) {
             return (
                 <SceneCategoryList
                     navigator={navigator}
@@ -182,7 +191,7 @@ class App extends Component {
             );
         }
 
-        if (route.id === 'SceneCategory') {
+        if (route.id === SceneId.CATEGORY) {
             return (
                 <SceneCategory
                     navigator={navigator}
@@ -194,7 +203,7 @@ class App extends Component {
             );
         }
 
-        if (route.id === 'SceneDiscussion') {
+        if (route.id === SceneId.DISCUSSION) {
             return (
                 <SceneDiscussion
                     navigator={navigator}
@@ -250,13 +259,13 @@ class App extends Component {
         console.log('App.navMenu ' + navigator);
 
         var routes = navigator.getCurrentRoutes();
-        if (routes.length && routes[routes.length - 1].id == 'SceneMenu') {
+        if (routes.length && routes[routes.length - 1].id == SceneId.MENU) {
             // Close the menu
             navigator.pop();
         } else {
             // Open the menu
             navigator.push({
-                id: 'SceneMenu',
+                id: SceneId.MENU,
                 title: 'Menu',
 
                 // Should be FloatFromBottom, but this isn't implemented
@@ -269,7 +278,7 @@ class App extends Component {
         console.log('App.navNotImplemented');
 
         navigator.push({
-            id: 'SceneNotImplemented',
+            id: SceneId.NOT_IMPLEMENTED,
         });
     }
 
@@ -277,7 +286,7 @@ class App extends Component {
         console.log('App.navCategoryList');
 
         navigator.resetTo({
-            id: 'SceneCategoryList',
+            id: SceneId.CATEGORY_LIST,
             title: 'Categories',
         });
     }
@@ -286,7 +295,7 @@ class App extends Component {
         console.log('App.navCategory ' + categoryData['Name']);
 
         navigator.push({
-            id: 'SceneCategory',
+            id: SceneId.CATEGORY,
             title: categoryData['Name'],
             passProps: {
                 categoryData: categoryData,
@@ -298,7 +307,7 @@ class App extends Component {
         console.log('App.navDiscussion ' + discussionData['Name'])
 
         navigator.push({
-            id: 'SceneDiscussion',
+            id: SceneId.DISCUSSION,
             title: 'Discussion',
             passProps: {
                 discussionData: discussionData,
