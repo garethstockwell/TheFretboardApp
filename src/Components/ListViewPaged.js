@@ -54,9 +54,13 @@ class ListViewPaged extends React.Component {
     pageBarItem() {
         var totalNumItems = this.props.totalNumItems || 0;
         var itemsPerPage = this.props.itemsPerPage;
+        var numPages = 1;
+        if (itemsPerPage) {
+            numPages = Math.floor(
+                (totalNumItems + itemsPerPage - 1) / itemsPerPage)
+        }
         var data = {
-            numPages: Math.floor(
-                (totalNumItems + itemsPerPage - 1) / itemsPerPage),
+            numPages: numPages,
         };
         console.log(this.constructor.name + '.pageBarItem'
             + ' totalNumItems ' + totalNumItems
