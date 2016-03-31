@@ -49,7 +49,18 @@ class ClientVanillaOpen {
             + ' categoryID '+ categoryID
             + ' pageIndex ' + pageIndex
             + ' itemIndex ' + itemIndex);
-        // TODO: raise 'not implemented' error
+
+        var url = '/categories/' + categoryID;
+
+        return ClientUtils.getRequest(
+                this.url + url,
+                (data => {
+                    return {
+                        // TODO: support pagination
+                        pageIndex: 1,
+                        discussions: data.Discussions || [],
+                    };
+                }), responseCallback, errorCallback);
     }
 };
 
