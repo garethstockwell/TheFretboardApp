@@ -26,20 +26,27 @@ const Styles = require('./Styles');
 
 // Based on
 // http://blog.paracode.com/2016/01/05/routing-and-navigation-in-react-native/
-function androidAddBackButtonListener(navigator) {
+
+var gNavigator;
+
+function androidAddBackButtonListener() {
     console.log('App.androidAddBackButtonListener');
 
     BackAndroid.addEventListener('hardwareBackPress', () => {
-        var routesLength = navigator.getCurrentRoutes().length;
+        if (gNavigator) {
+            var routesLength = gNavigator.getCurrentRoutes().length;
 
-        console.log('App.backAndroid routesLength ' + routesLength);
+            console.log('App.backAndroid routesLength ' + routesLength);
 
-        if (routesLength === 1) {
+            if (routesLength === 1) {
+                return false;
+            }
+
+            gNavigator.pop();
+            return true;
+        } else {
             return false;
         }
-
-        navigator.pop();
-        return true;
     });
 }
 
@@ -47,6 +54,8 @@ class App extends Component {
     constructor(props) {
         console.log('--- TheFretboardApp starting ---');
         super(props);
+
+        androidAddBackButtonListener();
 
         this.state = {
             server: Constants.SERVER_DEFAULT,
@@ -96,7 +105,7 @@ class App extends Component {
     renderNavigator() {
         return (
             <Navigator
-                ref={(navigator) => androidAddBackButtonListener(navigator)}
+                ref={(navigator) => gNavigator = navigator}
                 configureScene={(route) => {
                     if (route.sceneConfig) {
                         return route.sceneConfig;
