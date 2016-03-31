@@ -58,7 +58,7 @@ class ClientVanillaHosted {
                 (data => {
                     return {
                         pageIndex: pageIndex,
-                        discussions: data.Discussions
+                        discussions: data.Discussions || [],
                     };
                 }), responseCallback, errorCallback);
     }
